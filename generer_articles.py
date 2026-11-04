@@ -2,82 +2,131 @@
 import json
 import re
 import unicodedata
+from pathlib import Path
 from datetime import datetime, timezone, timedelta
 from email.utils import parsedate_to_datetime
-from pathlib import Path
 from difflib import SequenceMatcher
 
 SOURCE = Path("actualites_sources.json")
 OUTPUT = Path("articles_candidats.json")
 
-MAX_CANDIDATS = 15
+MAX_ARTICLES = 15
 AGE_MAX_JOURS = 45
 
 MOTS_IMPORTANTS = {
-    "montpellier": 5,
-    "herault": 4,
-    "location courte duree": 5,
-    "location saisonniere": 5,
-    "meuble de tourisme": 5,
-    "airbnb": 3,
-    "reglementation": 5,
-    "fiscalite": 5,
-    "loi": 3,
-    "decret": 4,
-    "autorisation": 5,
-    "changement d usage": 5,
-    "taxe de sejour": 5,
-    "copropriete": 4,
-    "tourisme": 2,
-    "proprietaire": 2,
-    "rentabilite": 3,
-    "interdiction": 4,
+    "montpellier": 8,
+    "herault": 7,
+    "location courte duree": 7,
+    "meuble de tourisme": 7,
+    "location saisonniere": 7,
+    "reglementation": 6,
+    "fiscalite": 6,
+    "airbnb": 6,
+    "proprietaire": 5,
+    "tourisme": 4,
+    "immobilier": 4,
+    "logement": 3,
+    "location": 3,
+    "taxe": 3,
+    "copropriete": 3,
+    "rentabilite": 3
 }
+
+MOTS_EXCLUS = [
+    "football",
+    "rugby",
+    "basket",
+    "mercato",
+    "accident mortel",
+    "fait divers",
+    "horoscope",
+    "recette de cuisine"
+]
+
 
 def normaliser(texte):
     texte = unicodedata.normalize(
-        "NFKD", str(texte or "").lower()
+        "NFKD",
+        str(texte or "").lower()
     )
+
     texte = "".join(
-        c for c in texte
-        if not unicodedata.combining(c)
+        caractere
+        for caractere in texte
+        if not unicodedata.combining(caractere)
     )
-    texte = re.sub(r"[^a-z0-9]+", " ", texte)
+
     return re.sub(r"\s+", " ", texte).strip()
 
 
-def calculer_score(titre, categorie):
-    texte = normaliser(titre)
-    score = sum(
-        points
-        for mot, points in MOTS_IMPORTANTS.items()
-        if normaliser(mot) in texte
-    )
+def date_publication(valeur):
+    if not valeur:
+        return None
 
-    if "montpellier" in texte:
-        score += 3
-
-    return score
-
-
-def date_valide(valeur):
     try:
         date = parsedate_to_datetime(valeur)
         if date.tzinfo is None:
             date = date.replace(tzinfo=timezone.utc)
         return date.astimezone(timezone.utc)
     except (TypeError, ValueError, IndexError):
+        pass
+
+    try:
+        date = datetime.fromisoformat(
+            valeur.replace("Z", "+00:00")
+        )
+        if date.tzinfo is None:
+            date = date.replace(tzinfo=timezone.utc)
+        return date.astimezone(timezone.utc)
+    except (TypeError, ValueError):
         return None
 
 
-def est_doublon(titre, candidats):
-    titre_normalise = normaliser(titre)
+def calculer_score(actualite):
+    titre = normaliser(
+        actualite.get("title", "")
+    )
 
-    for candidat in candidats:
-        autre = normaliser(candidat["title"])
+    resume = normaliser(
+        actualite.get("summary", "")
+    )
 
+    texte = titre + " " + resume
+
+    if any(mot in titre for mot in MOTS_EXCLUS):
+        return -100
+
+    score = 0
+
+    for mot, poids in MOTS_IMPORTANTS.items():
+        if mot in titre:
+            score += poids
+        elif mot in resume:
+            score += max(1, poids // 2)
+
+    if actualite.get("content_available"):
+        score += 5
+
+    if len(actualite.get("article_text", "")) >= 1000:
+        score += 3
+
+    if len(actualite.get("summary", "")) >= 200:
+        score += 2
+
+    if actualite.get("source_name") == "Service-Public":
+        score += 3
+
+    return score
+
+
+def est_doublon(titre, titres_existants):
+    titre = normaliser(titre)
+
+    for ancien in titres_existants:
         similarite = SequenceMatcher(
-            None, titre_normalise, autre
+            None,
+            titre,
+            normaliser(ancien)
         ).ratio()
 
         if similarite >= 0.76:
@@ -88,88 +137,122 @@ def est_doublon(titre, candidats):
 
 def main():
     if not SOURCE.exists():
-        raise FileNotFoundError(
-            "actualites_sources.json introuvable"
+        print("Aucune source disponible.")
+        OUTPUT.write_text(
+            "[]",
+            encoding="utf-8"
         )
+        return
 
     donnees = json.loads(
         SOURCE.read_text(encoding="utf-8")
     )
+
+    actualites = donnees.get("sources", [])
 
     maintenant = datetime.now(timezone.utc)
     limite = maintenant - timedelta(
         days=AGE_MAX_JOURS
     )
 
-    selection = []
-    liens_vus = set()
+    candidats = []
 
-    for item in donnees.get("sources", []):
-        titre = item.get("title", "").strip()
-        lien = item.get("source_url", "").strip()
-        categorie = item.get("category", "")
-        publication = item.get("published", "")
+    for actualite in actualites:
+        titre = actualite.get("title", "").strip()
+        url = actualite.get("source_url", "").strip()
 
-        if not titre or not lien.startswith("https://"):
+        if not titre or not url:
             continue
 
-        if lien in liens_vus:
-            continue
-
-        date = date_valide(publication)
-
-        if date is None or date < limite:
-            continue
-
-        if date > maintenant + timedelta(days=1):
-            continue
-
-        score = calculer_score(
-            titre, categorie
+        date = date_publication(
+            actualite.get("published", "")
         )
 
-        if score < 7:
+        if date and (
+            date < limite
+            or date > maintenant + timedelta(days=1)
+        ):
             continue
 
-        liens_vus.add(lien)
+        score = calculer_score(actualite)
 
-        selection.append({
+        if score < 4:
+            continue
+
+        candidats.append({
             "title": titre,
-            "category": categorie,
-            "summary": item.get("summary", ""),
-            "source_name": item.get(
-                "source_name", ""
+            "category": actualite.get(
+                "category",
+                "Actualités"
             ),
-            "source_url": lien,
-            "published": publication,
+            "summary": actualite.get(
+                "summary",
+                ""
+            ),
+            "article_text": actualite.get(
+                "article_text",
+                ""
+            ),
+            "content_available": bool(
+                actualite.get(
+                    "content_available",
+                    False
+                )
+            ),
+            "source_name": actualite.get(
+                "source_name",
+                ""
+            ),
+            "source_url": url,
+            "resolved_url": actualite.get(
+                "resolved_url",
+                url
+            ),
+            "published": actualite.get(
+                "published",
+                ""
+            ),
             "importance_score": score,
             "status": "a_verifier"
         })
 
-    selection.sort(
-        key=lambda x: x["importance_score"],
+    candidats.sort(
+        key=lambda item: (
+            item["importance_score"],
+            bool(item["content_available"]),
+            item["published"]
+        ),
         reverse=True
     )
 
-    candidats = []
+    selection = []
+    titres_vus = []
+    liens_vus = set()
 
-    for item in selection:
-        if est_doublon(item["title"], candidats):
-            continue
-
-        candidats.append(item)
-
-        if len(candidats) >= MAX_CANDIDATS:
+    for candidat in candidats:
+        if len(selection) >= MAX_ARTICLES:
             break
 
-    resultat = {
-        "updated_at": maintenant.isoformat(),
-        "candidats": candidats
-    }
+        if candidat["source_url"] in liens_vus:
+            continue
+
+        if est_doublon(
+            candidat["title"],
+            titres_vus
+        ):
+            continue
+
+        selection.append(candidat)
+        titres_vus.append(
+            candidat["title"]
+        )
+        liens_vus.add(
+            candidat["source_url"]
+        )
 
     OUTPUT.write_text(
         json.dumps(
-            resultat,
+            selection,
             ensure_ascii=False,
             indent=2
         ),
@@ -177,7 +260,19 @@ def main():
     )
 
     print(
-        f"{len(candidats)} actualités sélectionnées."
+        f"{len(actualites)} actualités analysées."
+    )
+
+    print(
+        f"{len(selection)} actualités sélectionnées."
+    )
+
+    print(
+        sum(
+            1 for article in selection
+            if article["content_available"]
+        ),
+        "articles sélectionnés avec contenu détaillé."
     )
 
 
