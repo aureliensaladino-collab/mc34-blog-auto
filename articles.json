@@ -1,6 +1,39 @@
 {
-  "updated_at": "2026-11-04T09:29:57.863915+00:00",
+  "updated_at": "2026-11-04T09:37:39.019279+00:00",
   "articles": [
+    {
+      "id": "b809b60e81086376",
+      "category": "Location courte durée",
+      "title": "\"J’ai trouvé un réseau dont la vision du service et les valeurs correspondent à ma conception du métier\", Jérôme Larguier, franchisé Les Maisons de Madeleine à Montpellier",
+      "excerpt": "Actualité immobilière et location courte durée : les informations à connaître.",
+      "date": "22/10/2026",
+      "minutes": 2,
+      "image": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1200",
+      "content": [
+        {
+          "heading": "Ce qu'il faut retenir",
+          "text": "Cette actualité a été identifiée dans notre veille consacrée à la location courte durée et au marché immobilier."
+        },
+        {
+          "heading": "Le contexte",
+          "text": "Cette publication concerne le thème « Location courte durée ». Elle fait partie des sujets suivis par Ma Conciergerie 34 pour informer les propriétaires de Montpellier et de l'Hérault."
+        },
+        {
+          "heading": "Ce que les propriétaires peuvent vérifier",
+          "text": "Avant d'agir, consultez la publication originale et vérifiez si les informations concernent votre logement."
+        },
+        {
+          "heading": "La source de l'information",
+          "text": "Cette actualité a été relayée par Toute la Franchise. La publication originale est accessible dans les sources ci-dessous."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Toute la Franchise",
+          "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxONjVSNzRHY2d3b1pWVWJZd3BoU2czd0VfazVtcUJkT0QtekpYRldJUnA2SkFsSWc4X0h1aHlPQjBLSUFFd3VrNTM1TktMVEhIc1hrSDhScHhrWTIyd0FNTS1IZkdxZ0tQNnpzc1dZZGVSQjBIM0pkdHEzLU9kMUtJbUJPb0g5Q21yX0ZGRnF3?oc=5"
+        }
+      ]
+    },
     {
       "id": "4f3d1fbaaf6f5a0c",
       "category": "Réglementation",
@@ -140,7 +173,7 @@
       "excerpt": "Une actualité à suivre pour les propriétaires et professionnels de la location courte durée.",
       "date": "04/11/2026",
       "minutes": 2,
-      "image": "",
+      "image": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1200",
       "content": [
         {
           "heading": "L'actualité",
@@ -169,7 +202,7 @@
       "excerpt": "Une actualité à suivre pour les propriétaires et professionnels de la location courte durée.",
       "date": "04/11/2026",
       "minutes": 2,
-      "image": "",
+      "image": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200",
       "content": [
         {
           "heading": "L'actualité",
@@ -198,7 +231,7 @@
       "excerpt": "Une actualité à suivre pour les propriétaires et professionnels de la location courte durée.",
       "date": "04/11/2026",
       "minutes": 2,
-      "image": "",
+      "image": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200",
       "content": [
         {
           "heading": "L'actualité",
@@ -227,7 +260,7 @@
       "excerpt": "Une actualité à suivre pour les propriétaires et professionnels de la location courte durée.",
       "date": "04/11/2026",
       "minutes": 2,
-      "image": "",
+      "image": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200",
       "content": [
         {
           "heading": "L'actualité",
@@ -256,7 +289,7 @@
       "excerpt": "Une actualité à suivre pour les propriétaires et professionnels de la location courte durée.",
       "date": "04/11/2026",
       "minutes": 2,
-      "image": "",
+      "image": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1200",
       "content": [
         {
           "heading": "L'actualité",
@@ -285,7 +318,7 @@
       "excerpt": "Une actualité à suivre pour les propriétaires et professionnels de la location courte durée.",
       "date": "04/11/2026",
       "minutes": 2,
-      "image": "",
+      "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200",
       "content": [
         {
           "heading": "L'actualité",
@@ -314,7 +347,7 @@
       "excerpt": "Une actualité à suivre pour les propriétaires et professionnels de la location courte durée.",
       "date": "04/11/2026",
       "minutes": 2,
-      "image": "",
+      "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200",
       "content": [
         {
           "heading": "L'actualité",
@@ -343,7 +376,7 @@
       "excerpt": "Une actualité à suivre pour les propriétaires et professionnels de la location courte durée.",
       "date": "04/11/2026",
       "minutes": 2,
-      "image": "",
+      "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200",
       "content": [
         {
           "heading": "L'actualité",
