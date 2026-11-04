@@ -1,56 +1,75 @@
 
 import json
+import re
+import html
 from datetime import datetime, timezone
 from pathlib import Path
 
 import feedparser
 import requests
 
-# Flux RSS de recherche d'actualités
 FEEDS = [
     (
         "Location courte durée",
-        "https://news.google.com/rss/search?q="
-        "location+courte+dur%C3%A9e+Montpellier"
-        "&hl=fr&gl=FR&ceid=FR:fr"
+        "location courte durée Montpellier"
     ),
     (
         "Réglementation",
-        "https://news.google.com/rss/search?q="
-        "meubl%C3%A9s+de+tourisme+r%C3%A9glementation"
-        "&hl=fr&gl=FR&ceid=FR:fr"
+        "meublés de tourisme réglementation"
     ),
     (
         "Fiscalité",
-        "https://news.google.com/rss/search?q="
-        "fiscalit%C3%A9+location+saisonni%C3%A8re"
-        "&hl=fr&gl=FR&ceid=FR:fr"
+        "fiscalité location saisonnière"
+    ),
+    (
+        "Marché immobilier",
+        "tourisme immobilier Montpellier Hérault"
+    ),
+    (
+        "Conseils propriétaires",
+        "location saisonnière propriétaires conseils"
     )
 ]
 
 OUTPUT = Path("actualites_sources.json")
 
 
+def nettoyer(texte):
+    texte = re.sub(
+        r"<[^>]+>", " ", str(texte or "")
+    )
+    texte = html.unescape(texte)
+    return re.sub(r"\s+", " ", texte).strip()
+
+
 def collecter():
     actualites = []
     liens_vus = set()
 
-    for categorie, url in FEEDS:
+    for categorie, recherche in FEEDS:
         try:
             response = requests.get(
-                url,
+                "https://news.google.com/rss/search",
+                params={
+                    "q": recherche,
+                    "hl": "fr",
+                    "gl": "FR",
+                    "ceid": "FR:fr"
+                },
                 timeout=20,
                 headers={
-                    "User-Agent": "MC34Blog/1.0"
+                    "User-Agent": "Mozilla/5.0"
                 }
             )
-            response.raise_for_status()
 
+            response.raise_for_status()
             flux = feedparser.parse(response.content)
 
-            for entree in flux.entries[:10]:
-                titre = entree.get("title", "").strip()
-                lien = entree.get("link", "").strip()
+            for entree in flux.entries[:15]:
+                titre = nettoyer(
+                    entree.get("title", "")
+                )
+                lien = entree.get("link", "")
 
                 if not titre or not lien:
                     continue
@@ -60,9 +79,24 @@ def collecter():
 
                 liens_vus.add(lien)
 
+                source = entree.get("source", {})
+                if not isinstance(source, dict):
+                    source = {}
+
+                resume = nettoyer(
+                    entree.get("summary", "")
+                )
+
+                # Google News peut fournir un
+                # résumé contenant seulement
+                # des liens et des titres.
                 actualites.append({
                     "category": categorie,
                     "title": titre,
+                    "summary": resume[:1500],
+                    "source_name": nettoyer(
+                        source.get("title", "")
+                    ),
                     "source_url": lien,
                     "published": entree.get(
                         "published", ""
@@ -95,8 +129,7 @@ def main():
     )
 
     print(
-        f"{len(donnees['sources'])} "
-        "actualités collectées."
+        f"{len(actualites)} actualités collectées."
     )
 
 
