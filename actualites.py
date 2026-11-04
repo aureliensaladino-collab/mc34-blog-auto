@@ -3,6 +3,7 @@ import json
 import re
 import html
 import time
+import unicodedata
 from pathlib import Path
 from datetime import datetime, timezone
 from urllib.parse import urlparse
@@ -12,79 +13,71 @@ import feedparser
 from bs4 import BeautifulSoup
 
 OUTPUT = Path("actualites_sources.json")
-
-MAX_PAR_FLUX = 15
+TIMEOUT = 12
+MAX_PAR_FLUX = 12
 MAX_TEXTE = 9000
-TIMEOUT = 15
 
-# Sources officielles et actualités spécialisées.
-# Les flux officiels peuvent aussi contenir
-# des sujets sans rapport avec l'immobilier.
+# Flux directs : les liens pointent vers les éditeurs.
+# Flux Google News : utiles pour repérer les sujets,
+# mais ne donnent pas directement les articles.
 FEEDS = [
     (
-        "Réglementation",
-        "https://www.service-public.fr/abonnements/rss/actu-actualites-particuliers.rss",
-        "Service-Public"
+        "Marché immobilier",
+        "https://www.bfmtv.com/rss/immobilier/",
+        "BFM Immo",
+        True
     ),
     (
-        "Réglementation",
-        "https://www.service-public.fr/abonnements/rss/actu-actu-pro.rss",
-        "Service-Public"
+        "Marché immobilier",
+        "https://www.franceinfo.fr/economie/immobilier.rss",
+        "Franceinfo",
+        True
+    ),
+    (
+        "Marché immobilier",
+        "https://actualites.logic-immo.com/actus-rss.xml",
+        "Logic-Immo",
+        True
     ),
     (
         "Location courte durée",
         "https://news.google.com/rss/search?q=location+courte+dur%C3%A9e+Montpellier&hl=fr&gl=FR&ceid=FR:fr",
-        "Google News"
+        "Google News",
+        False
     ),
     (
         "Réglementation",
         "https://news.google.com/rss/search?q=meubl%C3%A9s+tourisme+r%C3%A9glementation&hl=fr&gl=FR&ceid=FR:fr",
-        "Google News"
+        "Google News",
+        False
     ),
     (
         "Fiscalité",
         "https://news.google.com/rss/search?q=fiscalit%C3%A9+location+saisonni%C3%A8re&hl=fr&gl=FR&ceid=FR:fr",
-        "Google News"
-    ),
-    (
-        "Marché immobilier",
-        "https://news.google.com/rss/search?q=immobilier+Montpellier&hl=fr&gl=FR&ceid=FR:fr",
-        "Google News"
+        "Google News",
+        False
     ),
     (
         "Tourisme",
         "https://news.google.com/rss/search?q=tourisme+Montpellier+H%C3%A9rault&hl=fr&gl=FR&ceid=FR:fr",
-        "Google News"
+        "Google News",
+        False
     )
 ]
 
-MOTS_PERTINENTS = [
-    "immobilier",
-    "logement",
-    "location",
-    "locatif",
-    "meuble",
-    "tourisme",
-    "touristique",
-    "airbnb",
-    "proprietaire",
-    "copropriete",
-    "fiscalite",
-    "foncier",
-    "taxe de sejour",
-    "hebergement",
-    "montpellier",
-    "herault",
-    "residence secondaire",
-    "changement d usage"
+MOTS_CLES = [
+    "immobilier", "logement", "location",
+    "locatif", "meuble", "tourisme",
+    "touristique", "airbnb", "proprietaire",
+    "copropriete", "fiscalite", "foncier",
+    "hebergement", "montpellier", "herault",
+    "loyer", "habitation", "residence",
+    "investissement", "taxe", "dpe"
 ]
 
 SESSION = requests.Session()
 SESSION.headers.update({
-    "User-Agent": (
-        "Mozilla/5.0 MC34Blog/4.0 "
-        "(veille documentaire)"
-    ),
+    "User-Agent": "Mozilla/5.0 (compatible; MC34Blog/5.0)",
     "Accept-Language": "fr-FR,fr;q=0.9"
 })
 
@@ -99,14 +92,13 @@ def nettoyer(texte):
     )
 
     return re.sub(
-        r"\s+", " ",
+        r"\s+",
+        " ",
         soup.get_text(" ", strip=True)
     ).strip()
 
 
 def normaliser(texte):
-    import unicodedata
-
     texte = unicodedata.normalize(
         "NFKD",
         nettoyer(texte).lower()
@@ -118,19 +110,20 @@ def normaliser(texte):
     )
 
 
-def pertinent(titre, resume):
-    texte = normaliser(titre + " " + resume)
+def est_pertinent(titre, resume):
+    contenu = normaliser(titre + " " + resume)
 
     return any(
-        mot in texte
-        for mot in MOTS_PERTINENTS
+        mot in contenu
+        for mot in MOTS_CLES
     )
 
 
-def est_google_news(url):
+def est_lien_direct(url):
     try:
         domaine = urlparse(url).hostname or ""
-        return (
+
+        return not (
             domaine == "news.google.com"
             or domaine.endswith(".news.google.com")
         )
@@ -138,11 +131,8 @@ def est_google_news(url):
         return False
 
 
-def extraire_texte(url):
-    # Les liens Google News sont des liens
-    # intermédiaires. On ne les considère
-    # pas comme des pages d'articles.
-    if est_google_news(url):
+def extraire_article(url):
+    if not est_lien_direct(url):
         return "", url
 
     try:
@@ -170,13 +160,12 @@ def extraire_texte(url):
         ]):
             element.decompose()
 
-        # Privilégier la partie éditoriale.
         conteneur = (
             soup.find("article")
             or soup.find("main")
         )
 
-        if not conteneur:
+        if conteneur is None:
             return "", response.url
 
         paragraphes = []
@@ -198,9 +187,6 @@ def extraire_texte(url):
 
         contenu = "\n\n".join(paragraphes)
 
-        # Éviter de prendre quelques
-        # éléments de navigation pour
-        # un véritable contenu.
         if len(contenu) < 350:
             return "", response.url
 
@@ -208,14 +194,14 @@ def extraire_texte(url):
 
     except requests.RequestException as erreur:
         print(
-            "Lecture impossible :",
-            str(erreur)[:150]
+            "Page inaccessible :",
+            str(erreur)[:120]
         )
         return "", url
 
 
-def collecter_flux(categorie, url, nom_flux):
-    resultats = []
+def collecter_flux(categorie, url, nom, direct):
+    actualites = []
 
     try:
         response = SESSION.get(
@@ -224,20 +210,16 @@ def collecter_flux(categorie, url, nom_flux):
         )
         response.raise_for_status()
 
-        flux = feedparser.parse(
-            response.content
-        )
+        flux = feedparser.parse(response.content)
 
         if not flux.entries:
-            print(
-                "Flux vide ou inaccessible :",
-                nom_flux
-            )
+            print("Flux vide :", nom)
 
         for entree in flux.entries[:MAX_PAR_FLUX]:
             titre = nettoyer(
                 entree.get("title", "")
             )
+
             lien = str(
                 entree.get("link", "")
             ).strip()
@@ -246,65 +228,78 @@ def collecter_flux(categorie, url, nom_flux):
                 entree.get("summary", "")
             )
 
-            if not titre or not lien.startswith(
-                "https://"
+            if not titre:
+                continue
+
+            if not lien.startswith(
+                ("https://", "http://")
             ):
                 continue
 
-            if not pertinent(titre, resume):
+            if not est_pertinent(titre, resume):
                 continue
 
-            source = entree.get("source", {})
-            source_name = nom_flux
+            contenu = ""
+            lien_final = lien
 
-            if isinstance(source, dict):
-                source_name = (
-                    source.get("title")
-                    or nom_flux
+            if direct:
+                contenu, lien_final = extraire_article(
+                    lien
                 )
 
-            contenu, lien_final = extraire_texte(
-                lien
-            )
+            source = entree.get("source", {})
+            nom_source = nom
 
-            resultats.append({
+            if isinstance(source, dict):
+                nom_source = (
+                    source.get("title") or nom
+                )
+
+            actualites.append({
                 "category": categorie,
                 "title": titre,
-                "summary": resume[:2000],
-                "source_name": source_name,
                 "source_url": lien,
                 "resolved_url": lien_final,
+                "source_name": nom_source,
                 "published": entree.get(
                     "published",
                     entree.get("updated", "")
                 ),
+                "summary": resume[:2000],
                 "article_text": contenu,
                 "content_available": bool(contenu)
             })
+
+            if contenu:
+                print(
+                    "Contenu détaillé obtenu :",
+                    titre[:70]
+                )
 
             time.sleep(0.1)
 
     except requests.RequestException as erreur:
         print(
-            "Erreur flux",
-            nom_flux,
-            str(erreur)[:150]
+            "Erreur de flux :",
+            nom,
+            str(erreur)[:120]
         )
 
-    return resultats
+    return actualites
 
 
 def main():
     actualites = []
     liens_vus = set()
 
-    for categorie, url, nom_flux in FEEDS:
-        print("Collecte :", categorie, nom_flux)
+    for categorie, url, nom, direct in FEEDS:
+        print("Collecte :", nom, categorie)
 
         resultats = collecter_flux(
             categorie,
             url,
-            nom_flux
+            nom,
+            direct
         )
 
         print(
@@ -313,7 +308,7 @@ def main():
         )
 
         for item in resultats:
-            lien = item["source_url"]
+            lien = item["resolved_url"]
 
             if lien in liens_vus:
                 continue
@@ -338,13 +333,14 @@ def main():
     )
 
     disponibles = sum(
-        bool(item["content_available"])
-        for item in actualites
+        1 for item in actualites
+        if item["content_available"]
     )
 
     print(
         f"{len(actualites)} actualités collectées."
     )
+
     print(
         f"{disponibles} contenus détaillés récupérés."
     )
