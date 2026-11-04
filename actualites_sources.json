@@ -1,12 +1,6 @@
 {
-  "updated_at": "2026-11-03T08:19:58.782098+00:00",
+  "updated_at": "2026-11-04T08:22:47.070295+00:00",
   "sources": [
-    {
-      "category": "Location courte durée",
-      "title": "Locations Airbnb : deux propriétaires condamnés à Montpellier pour changement d’usage illégal - Echo des Tribunes",
-      "source_url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxQd3JVcUNlNjlRZ0VmbGdXenB6MU1lMHlkXy1ndS1CX2k1MFM4dktuM01lWUt5dTVmdEJtVTZxRHVnYVN5aVRuQWZETjdRR09VaXctaER5MDdOem1NTk94ZlAtZnRFVU5HSDQ0VlNDdEFiUDE0VVlyWjZkSkR1M3hkT0RKTjBzVEJzNDk5aTUxTUVlWFhrUU8taUd0OHg3aHJEUUJacEFWLW13NHdWaEsxbmNvLVNGSkY2aHNBYjJweTViZ1lfM2pOa3dJbktBNHlabklpS0V5b2JHN2FCQVE?oc=5",
-      "published": "Tue, 21 Apr 2026 07:00:00 GMT"
-    },
     {
       "category": "Location courte durée",
       "title": "Airbnb à Montpellier : 2 propriétaires condamnés, la ville durcit le ton - Le Journal Toulousain",
@@ -15,8 +9,44 @@
     },
     {
       "category": "Location courte durée",
+      "title": "La Métropole de Montpellier renforce la réglementation sur les locations meublés de tourisme - Actu.fr",
+      "source_url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxOWGZhOENJd3FVbW4xOGxYRjNBdHI2dWg1MEs0WlB4dDcybGhnXzBleTV5ZXRXLVNTeGlBQ0tMMDZGYTNHSVFxbWcycmxUY3lCQVlhM0R1bDJHWUh3REYzUXBfWHpZYWdYdWJ3czh3QnBsTWRwTThzTmlDVW5HWHVmZ1hRWDYtU3ZEbF91V3VwLUlJSDZ4OHduRng2dnprZzhRdXNkbTNidW1SMTFTaGVIbUtQNjR5WVdxZE9yZ1FxYXNQOV9xWWtHbkg5djRUUXVTQXJYcEdZTW1oRk9uTkRFcVNCTFo?oc=5",
+      "published": "Wed, 15 Oct 2025 07:00:00 GMT"
+    },
+    {
+      "category": "Location courte durée",
+      "title": "Montpellier : deux propriétaires condamnés pour avoir loué sur Airbnb sans l'autorisation de la mairie - lagazettedemontpellier.fr",
+      "source_url": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxPa2JtU2JxcEdxRmM0bVg5UmNja2F1N1F0T1Y2eXBWMU9SZFBLcnI3a2RiaGRHZkxackRWUVdybTBZUm8zOTZveDRxRjZPUG9jNndtUnNCaTNoaF9xZlQxZzA2ZE9RdVJjY0pJWFp2dHgxMGFuVUxJVmdpZHNzSWlDamhKUEhZbEQ1T3JZZ2xmYl9wSjRrcnVSTDFOQ0dleXhtRzFjXzJEbEZQOEZoTDZWS0FCWVBjT1dLSXlPZ1BoZlo4VFlUZ2QxN2gxdHhLenV0T2QwSmplZXNvTjhFbDQyNmNEUHV3SEI0OVg2WFJfOA?oc=5",
+      "published": "Tue, 21 Apr 2026 07:00:00 GMT"
+    },
+    {
+      "category": "Location courte durée",
+      "title": "Trop de meublés touristiques Airbnb ? La Métropole de Montpellier impose des quotas - Capital.fr",
+      "source_url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQOXhIOTBXel9qTXNZVndkOWN0RHJGSWxtblRjVk81b000alFudGFmOGZMWWZwR2J3VTR3UVVQMmZSS3pyWm1sUEVsOEY5bDFiN3dhZmtVakN2eS1kNzAwT2VsX19Ha3BjZ0tObDlCQXFGcUJIelA1THRPWTB6QjVOalh2cFpfZGIxaXpUX1c2Q1RfRFpZdTVYZm9kNU5rcUdKTmhhVkthenAwSkhKRjFBY3NsU2E1djNtNUVWV01EbEY?oc=5",
+      "published": "Fri, 17 Oct 2025 07:00:00 GMT"
+    },
+    {
+      "category": "Location courte durée",
       "title": "Location Airbnb : deux propriétaires condamnés à 11.000 euros d’amende à Montpellier - Boursorama",
       "source_url": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxPaXY0dXIzeEdjVTJtVlFOaWdEWWRxQUNSb0pTR0w0SHJWbnpyNlVLdm5VdUllSVV6aHlWZk9MVDVGUEQwakl3cTBzZEpQVzJZSC1FR2tJWXZ6TVRlSmZySm9OWHV3R2hUQUhrOHRYeG55U3VqUVBoUWo2ckxmVjhOSDNGczNjaFV0YTVsTFJGM2RpdFNNYUtVY2RoaklzVFN0Q3FhNDl4WFdPMm92cmR4dXJBNGRBeVd6RGpqMXFjay1mSThXWjVJUGh3bzBtQU9FS3RQOVlvQUlGOGFWdnVweEVvOHd1MlBiWmdqbmtud1VKdHJORGVZ?oc=5",
+      "published": "Thu, 23 Apr 2026 07:00:00 GMT"
+    },
+    {
+      "category": "Location courte durée",
+      "title": "Encadrement des locations Airbnb à Montpellier : \"Une zone tendue en matière de logement\", selon Claudine Vassas-Mejri - Midi Libre",
+      "source_url": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxPLTNNVmtYM2pfSTg5aW5PM0ZZZGd2M3ZmLWdSQVBCRTE2SHdtVkJ4SWFudl9FVm5CVVMzN05MWkJpNlY0ZEFjdGhmRmQtajgtalBEQ2UyTTJVc2dTWGdHMHF0bzhVenlHVGpKdGtsQVVTRnFNdjJGdzdVRlZMc1pVd0w1YXo1OTBobmtvdDNBTTVNNThTWnZHdXIzNVlzMDBoSWNJU25OczR3b0RfRXNpb1pIQjlmNVhsdFNUU05uM3d6YXVaSDFkcE5FTjJNS0IyVU80MGJ1T3FPUC1tcTBsZHlyN3hDR2tkak1kZjRVejNHQ0NQ?oc=5",
+      "published": "Sat, 26 Apr 2025 07:00:00 GMT"
+    },
+    {
+      "category": "Location courte durée",
+      "title": "\"Favoriser l’accès au logement\" : pourquoi cette grande ville du sud de la France veut réguler les locations Airbnb et assigne les fraudeurs en justice - France 3 Régions",
+      "source_url": "https://news.google.com/rss/articles/CBMizAJBVV95cUxNUkFsejhRM2lWZ1Z3dUxZRzRGTGZCUGxack1KbnhrTE1qb2VIQmZEbzh6aENKMUJGNENCcTNqQ0JKUjhmUmVvVk9rWVg2aFJNVi1hRE9UaHZJS3hUSF9faWhVTjllX3lzX2E1VndVSXZmY0FTVzh4VmhieW9zSWlpNkRxUi1IYkdfVmR1eWQ1QnRWd2Zfc1ZqWEtoYmVoemR0ck5GLTYwSzhxSktWTFZOb1FyLVVuV1N6TlZYNHloeE9pZGtWUXVMazZJN0tES1VrNmpmRVZUM09yUmN2dWhZOWtCQllwX1V3S0dBTmd0OXZ0RmtWRHdzLVF4elhmRGxTbFJPRVgySGl6SDJRVUM0VzJLbXhXOE5IMkprVF91M2l0aXEtaUxJdmhFOTJ1TDJKSmVRU2x6SlVFRUc1T3NZelFzZVh3WUc2M1JYUQ?oc=5",
+      "published": "Mon, 27 Apr 2026 07:00:00 GMT"
+    },
+    {
+      "category": "Location courte durée",
+      "title": "Airbnb. Deux propriétaires condamnés à 11 000 € d’amende pour avoir loué leurs logements sans autorisation à Montpellier - Ouest-France",
+      "source_url": "https://news.google.com/rss/articles/CBMixAJBVV95cUxONGNhOGtrMUgwYkpjZnMwbkNjUDl1X1JqV241aEgzV200WXlGWkFuaXVKR19xQlBVNXhFM3dvcWxNSGVqTktyUmxjd0xELWRtd1lNdHMwMTRsSjlUaTRWNE5xZmpJcno4Z05wOTEzQnotWFloMUFCeUNibVpib0R3enFTV0k5cm5Ub0JEYmlSWGhSUkFBZzFUbGhpV04yUEhEZHduajh6QldUNnZ6dzJLWjRTaHVwLUZhSnREWmluMHp5WEZtdUpWUFVONWhaVnhMX2dPR0JXaDdCeDdFZGRPVjVEdnc5SUVmZ19LdXd4ZnNITUpDWHAtMXdiQjRfR08yZ0p3MTBQTEEybkdEOU9QdlozcFRTTHZBV0FTSW1GQ21tTU9ZR21UU3MtSldKOGZlU1M1ZEJQeDhNeGpOWmwxbzctLTc?oc=5",
       "published": "Thu, 23 Apr 2026 07:00:00 GMT"
     },
     {
@@ -27,39 +57,21 @@
     },
     {
       "category": "Location courte durée",
-      "title": "\"J’ai trouvé un réseau dont la vision du service et les valeurs correspondent à ma conception du métier\", Jérôme Larguier, franchisé Les Maisons de Madeleine à Montpellier - Toute la Franchise",
-      "source_url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxONjVSNzRHY2d3b1pWVWJZd3BoU2czd0VfazVtcUJkT0QtekpYRldJUnA2SkFsSWc4X0h1aHlPQjBLSUFFd3VrNTM1TktMVEhIc1hrSDhScHhrWTIyd0FNTS1IZkdxZ0tQNnpzc1dZZGVSQjBIM0pkdHEzLU9kMUtJbUJPb0g5Q21yX0ZGRnF3?oc=5",
-      "published": "Thu, 22 Oct 2026 13:04:53 GMT"
+      "title": "« Montpellier, ce n’est pas la ville du Airbnb » : les locations touristiques limitées à 90 jours par an - Figaro Immobilier",
+      "source_url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNa2FBNHNKelhQcWhCelRmOUZmU0FfQ2RoZDhBZjZpSDlsYzM4Znlka2o5RzFVLUZtbVpyeHRxV3V5NmJOUjRUak94ZTJpb0gwbkJWTG96X1AtVnVMd0pjQWp5N1NoaFgyajl5VGhtLUgyMUpUNGIwTmVhd181RFRkY0VnYnUxckJEeE5wSUV4N3duT21BcmdiUWNYbUZqUXZENVROclQtS3oyUHpCWTJ1NHpuYlhWR2dUYkwyQVNaOS1CMi1HaEJtT1REZ2dVVkp5MlVXamtnOThwWUdtUXc?oc=5",
+      "published": "Fri, 17 Oct 2025 07:00:00 GMT"
     },
     {
-      "category": "Location courte durée",
-      "title": "Airbnb : les copropriétés pourront-elles bientôt refuser la location de logements ? La mesure fait débat - franceinfo",
-      "source_url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxOYzlJODhVNVRGMXA4TlMxU3NOVnBwcXlodlpQd09ZYjV1MmhGVVBoamhIN1A1NlZ0NEFmbExMc084dE03MFJ1NWdhQ0FtMk1PUUdBcm5SZXNPU2JSNy1YVkhmaXZqR0RlN0dTTG5JMlJjUlV4aGdfZnZYak1uNkw3UVU0aF80eE1WZ3MtenlZOTdfamJjblNvT1J0MkVxcklfMXZVNjJoSEhYam5zRC15eElRN0o1U3lWQ3pXdThGTXpsenBmRGJoTnJDQlBMeXc2T3RYbFc3enU0bWZMcm1XZVZYdVBDMlQ1TlVV?oc=5",
-      "published": "Fri, 20 Mar 2026 07:00:00 GMT"
+      "category": "Réglementation",
+      "title": "Meublés de tourisme au Pays basque : « La réglementation freine la spéculation et préserve le logement », estime Peio Dufau - https://horticulture-abadie-pyrenees.com/",
+      "source_url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE9GUmpkZzR4LVVwUHVjSW1STHNuajdsRnpxeFRnLWlxNDVFa1NZSWFIVWhTbWt6NUR1ZTBzb29iX1VTUC1ldUJGaWdNazlReEN5TUxSYWxKQWY5UnQ1ejlYMGdJd2FLdU84OXd1NkpiVm8?oc=5",
+      "published": "Tue, 03 Nov 2026 16:37:33 GMT"
     },
     {
-      "category": "Location courte durée",
-      "title": "Le corps d'un homme retrouvé dans un appartement de Palavas-les-Flots, il présentait \"de multiples blessures\" - ici.fr",
-      "source_url": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxOY3pQTGk2aEVxNWtHaXN5NDRVbWpYRmJ6UktvZGpVNWVQR3RjeXN5Z2Vja0l1bHAwTVNlMFJIdEZMckxVWElOX05YSVZrby0xZmdxV1BfWDRrTzhCWHdvcUpMaWd4NEp6YUhKbk5IaDJWZlZKa3NxQlFqbndkb0ZESi1RMy1DODNRS1dBMy1VaWRuakh1Wmh2a3R6MzNVQTcxMDRHdlc2WXdZeUpySE9Dd0p1Zm84NGcybk5xUGY4WFlRZzIzcjVUUUtPX2VpVVc5aV9MSUg0bFJYRWRHNjNvRGJaa01Na05HMUlMeS05RXU1cURhQVQ0?oc=5",
-      "published": "Wed, 09 Sep 2026 07:00:00 GMT"
-    },
-    {
-      "category": "Location courte durée",
-      "title": "Montpellier durcit sa réglementation sur les locations Airbnb - La Gazette de Montpellier",
-      "source_url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPdll3bUtCNUVzeEhFMWZnT1poMUNjalM5LXc0anI3OUxYWlNmbjhCM1JEd3FJaFJIN2RXNmZrTERKcVpRNkhTMUljTzNqbmJEUDJ6aDlRWDFWdzVwOVFMdHBfb0xaZTdSV3V5RGtzMDZ0c2tNMlY1eVppWXc2cWJLeXhVQVc5SFVPMllfTG9nOFRCandjYTNUalE3NTgyZ1ZRc3N1YlpySU54cV9Lc2xtTUlwOENBOWYwbkJj?oc=5",
-      "published": "Tue, 14 Oct 2025 07:00:00 GMT"
-    },
-    {
-      "category": "Location courte durée",
-      "title": "La location Airbnb, vraiment mauvaise pour l'immobilier ? Elle ne représente que 0,8 % des logements dans les grandes villes (infographies) - Trends-Tendances",
-      "source_url": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxOeDZmVGNXdUhnYVc3TVQwVjhucEhYQ0IyWUgzUTlmaWZXQWVVWUJ1SnFtVUsyeFl3VmdMb1o0MUZrTXZvVVRCei1LS1NseVVMbFh5MVEyQ2JmbGZMSDNya3hjVzNnclVObHVaM1lvbXlxRmlRQUEyYXhtel9XTk5wMGcxN2xkcW84TGFvVkt4RVI0cWhLenpZZHRBaUt1U0JlOE04SWJQRXhXS0xOWWh6ZG1kTFpvQm5SOHQtZk9nQU1rRHEzclpyQm9oZFFJTWlvcHBJT0NjNGFSVEdJemtheHNBX3NGX21MV3J2MGVSS2lJUQ?oc=5",
-      "published": "Thu, 11 Jun 2026 07:00:00 GMT"
-    },
-    {
-      "category": "Location courte durée",
-      "title": "Encadrement des locations Airbnb à Montpellier : \"Une zone tendue en matière de logement\", selon Claudine Vassas-Mejri - Midi Libre",
-      "source_url": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxPLTNNVmtYM2pfSTg5aW5PM0ZZZGd2M3ZmLWdSQVBCRTE2SHdtVkJ4SWFudl9FVm5CVVMzN05MWkJpNlY0ZEFjdGhmRmQtajgtalBEQ2UyTTJVc2dTWGdHMHF0bzhVenlHVGpKdGtsQVVTRnFNdjJGdzdVRlZMc1pVd0w1YXo1OTBobmtvdDNBTTVNNThTWnZHdXIzNVlzMDBoSWNJU25OczR3b0RfRXNpb1pIQjlmNVhsdFNUU05uM3d6YXVaSDFkcE5FTjJNS0IyVU80MGJ1T3FPUC1tcTBsZHlyN3hDR2tkak1kZjRVejNHQ0NQ?oc=5",
-      "published": "Sat, 26 Apr 2025 07:00:00 GMT"
+      "category": "Réglementation",
+      "title": "Loi Le Meur : ce qui change pour les meublés de tourisme et les loueurs Airbnb - Mediaterranee.com",
+      "source_url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQaTF3TFZvYmUwRUo2a1pfVWtHS2ozX2ViQXBHNTF6eVFjcGxiYi1PN19IWXVEQndiZlNFdUpsc2FMR3laRE1XeU9pQThnQmhMTlA3cmlmZS1jRUI3cTFXRWprR3gwSTVSajBRc01nMHlGa010VVptWjNCOFQ0Z0w1cHdqQlFVMkVMaG5WTlZpRFdOMXBlR0hrR1ZJVHpzR1prZlpGTFAwbXE1QnNTTktvSkN0VQ?oc=5",
+      "published": "Thu, 29 Oct 2026 02:25:15 GMT"
     },
     {
       "category": "Réglementation",
@@ -69,57 +81,45 @@
     },
     {
       "category": "Réglementation",
-      "title": "Le Conseil constitutionnel porte un coup rude aux loueurs Airbnb - Actu-Juridique",
-      "source_url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNZldNcU52RFIzNkxnN3hMTFdlUnNONDVxVTgtUm5paGFIUC1KWTFVRk45TEE3bk1ranBlaDRybGRTUU5YUXNIbUNrcWY3X0hsczhQSlZKd1FKa21yT191NnRZWTR5SUhoVy1SeGlJNUhEZlZ6MzlBNHZGZHdiaE56Q25uZnFpaEUzRGl4cVhubkNRZmkyUUlEVURQSklZN0RFMWV4VlhIZkg3MWMyMlpKRVA1QlczelBpeG1rWmlB?oc=5",
-      "published": "Mon, 18 May 2026 07:00:00 GMT"
+      "title": "Propriétaires de meublés de tourisme et de chambres d’hôtes, le Grand Avignon passe au crible les nouvelles règles - L'Echo du Mardi",
+      "source_url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxPR1hseDZqb2g5ZTdDVjJMeWgzOGdoSVhtS0h0TlJpTkJxSGpSd3A5bWtzZ25vYjd6alhlc0paWW5Na3c4Yy1KT3pIN2ZyRm9KMGxfTUJuU3NDTGlod3VybHBuNTFKREtOdDdQeGNVR29qLUZiTmVYcUxZTEhnSEVpU3FhVXRrSDhPWVdidG0zbm9KUjhGeG9ibUZHZUlwbGhKeWhHZnljQjllZVo3anh4UWFVbmVTNUQ1R2cwQXRlazZkZVVHR2c2S2p2Y2FRRWRFTGhhNlZueVlIZG4yUFRvRUF3R3hrQQ?oc=5",
+      "published": "Wed, 28 Oct 2026 16:00:59 GMT"
     },
     {
       "category": "Réglementation",
-      "title": "Meublés de tourisme : le contrôle des données enfin opérationnel pour les communes - Banque des Territoires",
-      "source_url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNWUQ1LXdEY1MtN0FnbFdsWmN5YzFJcXlWMXd3YUlaU1B0eUEwanFZRE8ycURob01sNENEYnNDNF9neEYzVkFWX0I2NV9kNmVqZERiMXlNVEVzZVBZTHJwTWZUVVJ5QW0xTUl1eVdrZ1VIN2d3dFpWYmgzYWNiVmpyZHR2ODBRRXV5UUo4MFN3OHBMci1RdERpaVdmRURoTVQ1aC16TlJuMzQtQkpnRmRuM0h3QzNRQVE?oc=5",
-      "published": "Fri, 20 Mar 2026 07:00:00 GMT"
+      "title": "URSSAF et LMNP : quand la déclaration est-elle obligatoire en 2026 ? - Gererseul",
+      "source_url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQWndPLW82b2VITnN0MVFIN01xZnlnMmlpQXpiWlVrbnZfbGRPZEJiTEEwU29GZkFhMjY5R0o5aF9LSDBhSEpxMHpVTHE3YmI1eV9DR2JCb2c0RjNMeXdlUVRTZEVtZUlkM3oxNVZMYTJMa2o3cjlwajFoYkNkV19HQk1ZRWs0YkhzRVVBMWlfa29rdDN4T0ppZ3NZS3VKRXhva05UeWtmNDAyOTBXdEN0bA?oc=5",
+      "published": "Thu, 29 Oct 2026 14:47:19 GMT"
     },
     {
       "category": "Réglementation",
-      "title": "Location de meublés de tourisme : quelles sont les règles ? - Generali",
-      "source_url": "https://news.google.com/rss/articles/CBMickFVX3lxTE5YelE3dEtUVXhzdkd0QjljMi1lRkhpRVdaY21uVmVuamg4SXBzcEdUaGttYmJlZmEtVkpiRkk2UUljNFMxdkpDZ3poUDJLQnk2cEEza3l6cVRJWkprTGdJYXpsWG8wMTNaZk50UkVXYXE1UQ?oc=5",
-      "published": "Thu, 09 Apr 2026 07:00:00 GMT"
+      "title": "Meublés de tourisme : la déclaration est obligatoire partout, mais le téléservice national n’ouvrira qu’en fin d’année - Bulletin des Communes",
+      "source_url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPMjZ2QlNWQnZoVXFmclVLLWIwSno2dDVjNnBMV1R5RHhvRXI0UklzYkF6aG94d3FSclRpU3A4bFk3ZjFrdzNWRy1XdGxxMUcxaXdRcWVYSldocGNXRUQ4T1RxZUdJVm1OTERSRDJhcGlvQlFQOF9CUXJPU0xXMGZnUVRkS2hXMFFaUW9aX283TzBpNHZ6bTJJ?oc=5",
+      "published": "Tue, 13 Oct 2026 09:20:02 GMT"
     },
     {
       "category": "Réglementation",
-      "title": "La régulation des meublés de tourisme renforcée - Strasbourg.eu",
-      "source_url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNTHRnZDk2ajRBLVNONVBSSWpxcm1obUI3UmtNNTBRcWo3YU9ELWI2ZzlpOTZVekpMcWt6NVg3VzFfaXJTNzBCZ0o2cDNLVW94cFh2ZWZXVkRBWXBZMjJxdTB5LS0zRXdlTE1QRzk4czRZYzlrQUFJNGhoOHFUVlRFdA?oc=5",
-      "published": "Mon, 22 Dec 2025 08:00:00 GMT"
+      "title": "Meublés touristiques au Pays basque : un bilan économique désastreux, selon Daniel Hiribarren - https://horticulture-abadie-pyrenees.com/",
+      "source_url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE14YmgxT2VSQ3lXQjdTX21ueXRlTlI2NXpmdWZUSkFhUGs1blJDNUo5bDhkTk1Lb0d4TnFxZ3NkVWgyZUpGZWhNMHBFQlk3TlNxUzduRzNLUElUZTZYWFZPYjV0R2lkbVMzQXU1SWpPQQ?oc=5",
+      "published": "Tue, 03 Nov 2026 09:39:20 GMT"
     },
     {
       "category": "Réglementation",
-      "title": "Encadrement des meublés de tourisme : de nouvelles règles pour préserver le logement des habitants à La Rochelle - Agglo La Rochelle",
-      "source_url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQMGVZaVl1cVlYRVlGcmJnbmU1WmNZRzFucEN6d1k0MXhOQU1xdGpWWUFVX3pJSnhWVE8xdTdfb05ON2tHdHp3MUdSWkVONVMyVzUwTFRxNEs5QkJCOW1WOW90UnV6d2RSVEFKMXJxd2Q2NGdwZU1aeDdjQ2daa2xkUnlrUmJNek1GdXdtZC16Q0d4MXJSWlJ2MjFkeENaRkpGczB6RW1SLWttQ3lLN2gyTFBnVktnLW1oX21pSncwN2tYbUNUNEdpeVV3?oc=5",
-      "published": "Fri, 14 Nov 2025 08:00:00 GMT"
+      "title": "Meublés de tourisme : qui devra s'enregistrer dans le futur registre national ? - TGS France",
+      "source_url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNVXdwbFlyMV81aFhjN2wtRHN2MUpyM2lNU2UxTEh6MEZQd2k4RE9nZmZtN1drOHBnSllzdVdPVGxFbTgyaTJ3Z0NVdFFGMngzNnZHZ2RUY0pOdktLdXRuZW16UGxiQy1yNFJaeW5Va0h3NHBTWVByTnlPRlEtR0FhVHdxYzVxbk5fUUpqTzUwdFpwakc1N3FXd25iWW5XSWRv?oc=5",
+      "published": "Fri, 25 Sep 2026 07:00:00 GMT"
     },
     {
       "category": "Réglementation",
-      "title": "Location meublée de tourisme : quelles sont les règles à respecter pour sa résidence principale - economie.gouv.fr",
-      "source_url": "https://news.google.com/rss/articles/CBMiggJBVV95cUxNUlB3OTd5eldNWXB5M0F4cjJHQWV6VF9lUHBtYlpRR2diVFJ0b0p5ZGw1bUJwTThIeEszUWhDanZxZHNScU9GaVhheEU0VWJJZTlCOFF4aDNSQXBfcXhkVFNLcVE5Zl8tdFJyQWNib3FhdWpLQ1dtODJwNlQ0X1VmUVZDeEdhdzhMN3BqdEJGTE5Mbmc4NmthallPakNpY3NVaWhYRGxKX0h1Smh2ekJ6MWRtTFZpd3JNNFd6ZjlJR0F3d0xEeExLbzlaak5vOXhqWkhQSDRPeXRVUlNhbVNxNEsxMmE2QmhBU0hKWlB0NXJzbEl6VUg3TjJidkN3NGEzMGc?oc=5",
-      "published": "Thu, 23 Oct 2025 15:17:21 GMT"
+      "title": "Airbnb : nouvelle victoire décisive pour la ville de Paris - Actu-Juridique",
+      "source_url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxObTRJbkhfSUt2bzFoaHpFMHU0M3V2TTVWVXV0WWdoYmltc1ZsN28xN2hqUThxU2tJNjkxUUs3SWJNMnlicHVVZm04WW9CRXExeHNKYzJvdlR4NFVtME9pNlBSUFBwYzVNcmJuYkhtYXhRQ0g4Tk1QdlhwbFRuUURNdHd4LTRmV3NGMGJUV3VxWEJqUVFLQ01iVnlhSy1iY2VrNjIteA?oc=5",
+      "published": "Fri, 04 Sep 2026 07:00:00 GMT"
     },
     {
       "category": "Réglementation",
-      "title": "Location meublée touristique : de nouvelles règles administratives et fiscales à appréhender - Chambre de Paris",
-      "source_url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQR0JZaHJzM0RXdUZVTzZ2UngtNU9EWDE0cE1pMjFmaHR6OGdJTURkSnlZZFJmZjc1RVExZFFDVDJmeVE4bkJFQXZhN2pWZHF4YTh2bXdhVVBGMWl4TEpwQkZyaEVYX2xHXzdQQVRMbzNMX29ERHd4OUdjcXhqQmlYNnZKUDhMT0ozd25vZmZEWjlNZTA3V1pqeEJQN08yOUJvYTlSM3lUalNiVGszOGVKR09JU2lHS3NMVXV5RHVicE9YaDVkS0E?oc=5",
-      "published": "Tue, 25 Mar 2025 07:00:00 GMT"
-    },
-    {
-      "category": "Réglementation",
-      "title": "Réglementation des locations de courte durée - cherbourg.fr",
-      "source_url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNRW1CdXkyUDFVN1J2dWpFRWdDYkVWWlRfQXJjZ1hXTlhjd2UzWXBFVjZGX3E2R0MyeXdvY0x2MlRVYmNqWVk2OGExZkpXak41MXlWRFBaZnNBSmQyckZ5ZWdwaHVPZEVzYWN1b2psblZqdC15aGxUZ1RQYkhVUVU5b0J5YTlyeUlpdmNINjh3WFNqenFici1r?oc=5",
-      "published": "Fri, 02 Jan 2026 08:00:00 GMT"
-    },
-    {
-      "category": "Réglementation",
-      "title": "Location meublée touristique : un nouveau tournant législatif pour la réglementation locative ! - Éditions Francis Lefebvre",
-      "source_url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxNMUdWc2tFb2gtUVEzU25PR2t3QlFoeWQybHlhUDJtR1o3bHZMRUVRdXduNGt5NkRadzNOYVp3Vnh5Y3cwN0ZodGZpc2lMc2kzSVBMcHlzYTRXek4zREF4MlFhcnctVWhCZHF1TlA2OFZTV1FiZVhoZHBqak54Zkx4WldhUWlZejQ2WGpMRkp3SVZBc2Vvak5VckFvZWdjV3V4ZFluSW5IcjBxTnF2Rjl4MjlmN3FGREVaUUVOU3dlenhiRUZhbDlWaXk4TDJJTVpIZHhXbC1mMFBOSW94Z1BuXw?oc=5",
-      "published": "Fri, 20 Dec 2024 08:00:00 GMT"
+      "title": "Nouvelle procédure d'enregistrement des meublés de tourisme : ce qui va changer pour les propriétaires - Capital.fr",
+      "source_url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxNRkVwSkxXLWI1Rk5CS3RoRWNSeDkwMjQxVVoxMHloaTdZN0tSR1RVY0J5cHh2VUlzYjA0aWhXSkFwQnRVY3JtM2R5WHVJRzh3NnVMWlF1RkJkQnM2NDNWNzFLRlp4ZFhfTW1tRDJKeUFTdS1fTHZ1RmJOU2NwemV1bFZqTy1BR1NsQ3pDaHVSUm5ILXRQRXNkWHktSEZCSTJ0UVpNdTliUFRVcW1CSndfaGZGWWttY0RtVmMxX1JqRWlyZS1kT3FQbWN6cm1MSkRKWFY3Zi1hZTI?oc=5",
+      "published": "Tue, 11 Aug 2026 07:00:00 GMT"
     },
     {
       "category": "Fiscalité",
@@ -129,27 +129,27 @@
     },
     {
       "category": "Fiscalité",
-      "title": "Airbnb, Abritel : déclarer les revenus aux impôts en 2023, quelle case - Tout Sur Mes Finances",
-      "source_url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQdkhJSEpnRGpCanBQM2lBb1BpejFFR2VKem9uRG84alEtVjd1a1FMdzR2ZHN0WVQyNzgweVBsMHoxNDlneE5BY01ROVY3eHRHSUYtUGdfam96Q1NVT1hvUUdBaGRzc2NNbkFpQm5mRkRyWGZfdjY2NFQ4UGZlM011eGxYb0ROUkVoN1ZJT3M1eG5LOHFadHMxampn?oc=5",
-      "published": "Wed, 28 Oct 2026 09:22:39 GMT"
-    },
-    {
-      "category": "Fiscalité",
       "title": "Location saisonnière, faculté de suspendre la location et taxe d'habitation - LégiFiscal",
       "source_url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQMmRqN2h0bkt3RE9QRVdWUzc3Tk5qaWNOSTl0c1NlRGFsWW1kT0FESV9adDhVY0lfSkhFcERhZzJuMXBjNjJIUHFBT3FYU3EwZjNzTktKdlRHaDUyUTF2Q1FtT0xubGhYX1dSVUlYcU9uRVItSEE2dU1aTDc5V2JvdFRPMVd0VERVQW1VOW5DMnhpdHRSRXY5SnZHNEdRZGJwWC1JWnkydG1rSGNFVXlIQXNRcEpxOXg0QkpNUEhmWFI?oc=5",
       "published": "Sun, 18 Oct 2026 22:04:39 GMT"
     },
     {
       "category": "Fiscalité",
-      "title": "Locations type Airbnb : la France compte alourdir la fiscalité - L'Echo touristique",
-      "source_url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNa1p6X2hKN0RXcVdZdUlsQ1hHU1pYM0FFQTRpbHU0YjlwU3VoNEtyU3d1c2VUUTRmYWhhVVVzNFRyaXNNSzVCWHRnS2JLRE0tODNlMmV5dnZLdUZ0OHZHZHl6cEYwa1FXa0diN2h4eTcwamZPaV83M20yajVubExpZzNFeHlCNzk2OEVkbU8xdElKRUhLc2hGdmtncjBjOVFuX3c?oc=5",
-      "published": "Tue, 06 Oct 2026 07:00:00 GMT"
+      "title": "Airbnb, Abritel : déclarer les revenus aux impôts en 2023, quelle case - Tout Sur Mes Finances",
+      "source_url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQdkhJSEpnRGpCanBQM2lBb1BpejFFR2VKem9uRG84alEtVjd1a1FMdzR2ZHN0WVQyNzgweVBsMHoxNDlneE5BY01ROVY3eHRHSUYtUGdfam96Q1NVT1hvUUdBaGRzc2NNbkFpQm5mRkRyWGZfdjY2NFQ4UGZlM011eGxYb0ROUkVoN1ZJT3M1eG5LOHFadHMxampn?oc=5",
+      "published": "Wed, 28 Oct 2026 09:22:39 GMT"
     },
     {
       "category": "Fiscalité",
       "title": "La fiscalité des locations saisonnières touristiques - meublés de tourisme - PAP",
       "source_url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOVkdYbExMNUFabVdFXzNrVDVWQjhHNlJ0RVhSSnlhUzViR1l1aWdwWWNaU3pkQk01Mzc1eWJkQ0xNdndHTmE5TnBlTmU4Y2xMck11U0pjM01oRGZkeDNNSTVzaWo0aXV1VUJFd0N2UVdGZ1ZsZmI5Z0gtd3VZQW0ycVFDblh5NkNOM1BzUjB3?oc=5",
       "published": "Fri, 22 May 2026 07:00:00 GMT"
+    },
+    {
+      "category": "Fiscalité",
+      "title": "Locations type Airbnb : la France compte alourdir la fiscalité - L'Echo touristique",
+      "source_url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNa1p6X2hKN0RXcVdZdUlsQ1hHU1pYM0FFQTRpbHU0YjlwU3VoNEtyU3d1c2VUUTRmYWhhVVVzNFRyaXNNSzVCWHRnS2JLRE0tODNlMmV5dnZLdUZ0OHZHZHl6cEYwa1FXa0diN2h4eTcwamZPaV83M20yajVubExpZzNFeHlCNzk2OEVkbU8xdElKRUhLc2hGdmtncjBjOVFuX3c?oc=5",
+      "published": "Tue, 06 Oct 2026 07:00:00 GMT"
     },
     {
       "category": "Fiscalité",
