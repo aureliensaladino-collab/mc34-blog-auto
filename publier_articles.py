@@ -2,106 +2,177 @@
 import json
 import re
 import hashlib
-from datetime import datetime, timezone
+import html
+from datetime import datetime, timezone, timedelta
+from email.utils import parsedate_to_datetime
 from pathlib import Path
+from difflib import SequenceMatcher
 
 SOURCE = Path("articles_candidats.json")
 OUTPUT = Path("articles.json")
 
 MAX_ARTICLES = 60
+MAX_NOUVEAUX = 5
+
+IMAGES = {
+    "Réglementation":
+        "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200",
+    "Fiscalité":
+        "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200",
+    "Marché immobilier":
+        "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200",
+    "Location courte durée":
+        "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1200",
+    "Conseils propriétaires":
+        "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200"
+}
+
+IMAGE_DEFAUT = (
+    "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200"
+)
 
 
 def lire_json(chemin, defaut):
-    if not chemin.exists():
-        return defaut
-
     try:
         return json.loads(
             chemin.read_text(encoding="utf-8")
         )
-    except (ValueError, OSError):
+    except (OSError, ValueError):
         return defaut
 
 
-def creer_id(url):
+def nettoyer(texte):
+    texte = html.unescape(str(texte or ""))
+    texte = re.sub(r"<[^>]+>", " ", texte)
+    return re.sub(r"\s+", " ", texte).strip()
+
+
+def titre_propre(titre):
+    titre = nettoyer(titre)
+    if " - " in titre:
+        titre = titre.rsplit(" - ", 1)[0]
+    return titre.strip()
+
+
+def identifiant(url):
     return hashlib.sha256(
         url.encode("utf-8")
     ).hexdigest()[:16]
 
 
-def nettoyer_titre(titre):
-    titre = re.sub(r"\s+", " ", titre).strip()
+def date_publication(valeur):
+    try:
+        date = parsedate_to_datetime(valeur)
+        if date.tzinfo is None:
+            date = date.replace(tzinfo=timezone.utc)
+        return date.strftime("%d/%m/%Y")
+    except (TypeError, ValueError, IndexError):
+        return ""
 
-    # Certains flux ajoutent le nom du média
-    if " - " in titre:
-        titre = titre.rsplit(" - ", 1)[0].strip()
 
-    return titre
+def texte_normalise(texte):
+    return re.sub(
+        r"[^a-z0-9]+", " ",
+        nettoyer(texte).lower()
+    ).strip()
 
 
-def creer_article(candidat):
-    titre = nettoyer_titre(
-        candidat.get("title", "")
-    )
-    url = candidat.get("source_url", "")
-    categorie = candidat.get(
-        "category", "Actualités"
-    )
+def resume_exploitable(resume, titre):
+    resume = nettoyer(resume)
+    titre = nettoyer(titre)
 
-    if not titre or not url.startswith("https://"):
+    if not resume or len(resume) < 100:
+        return ""
+
+    if SequenceMatcher(
+        None,
+        texte_normalise(resume),
+        texte_normalise(titre)
+    ).ratio() > 0.65:
+        return ""
+
+    return resume[:650]
+
+
+def creer_article(item):
+    titre = titre_propre(item.get("title", ""))
+    lien = item.get("source_url", "")
+    categorie = item.get("category", "Actualités")
+    media = nettoyer(item.get("source_name", ""))
+    date = date_publication(item.get("published", ""))
+
+    if not titre or not lien.startswith("https://"):
         return None
 
-    identifiant = creer_id(url)
+    resume = resume_exploitable(
+        item.get("summary", ""),
+        titre
+    )
+
+    introduction = (
+        resume if resume else
+        "Cette actualité a été identifiée dans "
+        "notre veille consacrée à la location "
+        "courte durée et au marché immobilier."
+    )
+
+    contenu = [
+        {
+            "heading": "Ce qu'il faut retenir",
+            "text": introduction
+        },
+        {
+            "heading": "Le contexte",
+            "text": (
+                "Cette publication concerne le thème "
+                f"« {categorie} ». Elle fait partie "
+                "des sujets suivis par Ma Conciergerie 34 "
+                "pour informer les propriétaires de "
+                "Montpellier et de l'Hérault."
+            )
+        },
+        {
+            "heading": "Ce que les propriétaires peuvent vérifier",
+            "text": (
+                "Avant d'agir, il est recommandé "
+                "de consulter la publication originale, "
+                "de vérifier sa date et de déterminer "
+                "si les informations concernent "
+                "effectivement le logement."
+            )
+        }
+    ]
+
+    if media:
+        contenu.append({
+            "heading": "La source de l'information",
+            "text": (
+                f"Cette actualité a été relayée par "
+                f"{media}. Le lien vers la publication "
+                "d'origine est disponible ci-dessous."
+            )
+        })
 
     return {
-        "id": identifiant,
+        "id": identifiant(lien),
         "category": categorie,
         "title": titre,
         "excerpt": (
-            "Une actualité à suivre pour les "
-            "propriétaires et professionnels "
-            "de la location courte durée."
+            resume[:180] if resume else
+            "Actualité immobilière et location "
+            "courte durée : les informations "
+            "à connaître."
         ),
-        "date": datetime.now(
-            timezone.utc
-        ).strftime("%d/%m/%Y"),
+        "date": date,
         "minutes": 2,
-        "image": "",
-        "content": [
-            {
-                "heading": "L'actualité",
-                "text": (
-                    "Cette information a été repérée "
-                    "dans notre veille immobilière. "
-                    "Le titre et la source sont "
-                    "présentés à titre informatif."
-                )
-            },
-            {
-                "heading": "Pourquoi suivre ce sujet ?",
-                "text": (
-                    "Les évolutions du marché, "
-                    "de la fiscalité et de la "
-                    "réglementation peuvent "
-                    "concerner les propriétaires "
-                    "de locations saisonnières."
-                )
-            },
-            {
-                "heading": "À vérifier",
-                "text": (
-                    "Consultez la publication "
-                    "d'origine et les sources "
-                    "officielles avant de prendre "
-                    "une décision concernant "
-                    "votre logement."
-                )
-            }
-        ],
+        "image": IMAGES.get(
+            categorie, IMAGE_DEFAUT
+        ),
+        "content": contenu,
         "sources": [
             {
-                "title": "Consulter l'actualité d'origine",
-                "url": url
+                "title": media or "Source originale",
+                "url": lien
             }
         ]
     }
@@ -127,11 +198,11 @@ def main():
 
     nouveaux = []
 
-    for candidat in donnees.get("candidats", []):
-        if candidat.get("status") != "a_verifier":
-            continue
+    for item in donnees.get("candidats", []):
+        if len(nouveaux) >= MAX_NOUVEAUX:
+            break
 
-        article = creer_article(candidat)
+        article = creer_article(item)
 
         if not article:
             continue
@@ -143,6 +214,9 @@ def main():
         nouveaux.append(article)
 
     resultat = {
+        "updated_at": datetime.now(
+            timezone.utc
+        ).isoformat(),
         "articles": (
             nouveaux + articles
         )[:MAX_ARTICLES]
@@ -158,7 +232,7 @@ def main():
     )
 
     print(
-        f"{len(nouveaux)} nouveaux articles créés."
+        f"{len(nouveaux)} nouveaux articles."
     )
     print(
         f"{len(resultat['articles'])} articles au total."
