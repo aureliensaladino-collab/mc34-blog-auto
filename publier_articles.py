@@ -3,7 +3,7 @@ import json
 import re
 import hashlib
 import html
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
 from pathlib import Path
 from difflib import SequenceMatcher
@@ -14,17 +14,14 @@ OUTPUT = Path("articles.json")
 MAX_ARTICLES = 60
 MAX_NOUVEAUX = 5
 
+# Photos d'illustration par catégorie
 IMAGES = {
-    "Réglementation":
-        "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200",
-    "Fiscalité":
-        "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200",
-    "Marché immobilier":
-        "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200",
-    "Location courte durée":
-        "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1200",
-    "Conseils propriétaires":
-        "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200"
+    "reglementation": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200",
+    "fiscalite": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200",
+    "immobilier": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200",
+    "tourisme": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1200",
+    "location": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1200",
+    "proprietaire": "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200"
 }
 
 IMAGE_DEFAUT = (
@@ -70,11 +67,59 @@ def date_publication(valeur):
         return ""
 
 
-def texte_normalise(texte):
+def normaliser(texte):
     return re.sub(
         r"[^a-z0-9]+", " ",
         nettoyer(texte).lower()
     ).strip()
+
+
+def choisir_image(categorie, titre=""):
+    texte = normaliser(categorie + " " + titre)
+
+    priorites = [
+        ("fiscal", "fiscalite"),
+        ("impot", "fiscalite"),
+        ("taxe", "fiscalite"),
+        ("loi", "reglementation"),
+        ("decret", "reglementation"),
+        ("reglement", "reglementation"),
+        ("interdiction", "reglementation"),
+        ("autorisation", "reglementation"),
+        ("copropriete", "reglementation"),
+        ("immobilier", "immobilier"),
+        ("marche", "immobilier"),
+        ("tourisme", "tourisme"),
+        ("voyage", "tourisme"),
+        ("location", "location"),
+        ("airbnb", "location"),
+        ("proprietaire", "proprietaire")
+    ]
+
+    for mot, cle in priorites:
+        if mot in texte:
+            return IMAGES[cle]
+
+    return IMAGE_DEFAUT
+
+
+def corriger_images(articles):
+    corrections = 0
+
+    for article in articles:
+        if not isinstance(article, dict):
+            continue
+
+        image = article.get("image")
+
+        if not isinstance(image, str) or not image.strip():
+            article["image"] = choisir_image(
+                str(article.get("category", "")),
+                str(article.get("title", ""))
+            )
+            corrections += 1
+
+    return corrections
 
 
 def resume_exploitable(resume, titre):
@@ -84,11 +129,13 @@ def resume_exploitable(resume, titre):
     if not resume or len(resume) < 100:
         return ""
 
-    if SequenceMatcher(
+    similarite = SequenceMatcher(
         None,
-        texte_normalise(resume),
-        texte_normalise(titre)
-    ).ratio() > 0.65:
+        normaliser(resume),
+        normaliser(titre)
+    ).ratio()
+
+    if similarite > 0.65:
         return ""
 
     return resume[:650]
@@ -111,9 +158,9 @@ def creer_article(item):
 
     introduction = (
         resume if resume else
-        "Cette actualité a été identifiée dans "
-        "notre veille consacrée à la location "
-        "courte durée et au marché immobilier."
+        "Cette actualité a été identifiée dans notre "
+        "veille consacrée à la location courte durée "
+        "et au marché immobilier."
     )
 
     contenu = [
@@ -134,11 +181,9 @@ def creer_article(item):
         {
             "heading": "Ce que les propriétaires peuvent vérifier",
             "text": (
-                "Avant d'agir, il est recommandé "
-                "de consulter la publication originale, "
-                "de vérifier sa date et de déterminer "
-                "si les informations concernent "
-                "effectivement le logement."
+                "Avant d'agir, consultez la publication "
+                "originale et vérifiez si les informations "
+                "concernent votre logement."
             )
         }
     ]
@@ -147,9 +192,9 @@ def creer_article(item):
         contenu.append({
             "heading": "La source de l'information",
             "text": (
-                f"Cette actualité a été relayée par "
-                f"{media}. Le lien vers la publication "
-                "d'origine est disponible ci-dessous."
+                f"Cette actualité a été relayée par {media}. "
+                "La publication originale est accessible "
+                "dans les sources ci-dessous."
             )
         })
 
@@ -159,15 +204,12 @@ def creer_article(item):
         "title": titre,
         "excerpt": (
             resume[:180] if resume else
-            "Actualité immobilière et location "
-            "courte durée : les informations "
-            "à connaître."
+            "Actualité immobilière et location courte "
+            "durée : les informations à connaître."
         ),
         "date": date,
         "minutes": 2,
-        "image": IMAGES.get(
-            categorie, IMAGE_DEFAUT
-        ),
+        "image": choisir_image(categorie, titre),
         "content": contenu,
         "sources": [
             {
@@ -187,13 +229,17 @@ def main():
     )
 
     articles = existant.get("articles", [])
+
     if not isinstance(articles, list):
         articles = []
 
+    # Réparer les photos des anciens articles
+    corrections = corriger_images(articles)
+
     ids = {
-        a.get("id")
-        for a in articles
-        if isinstance(a, dict)
+        article.get("id")
+        for article in articles
+        if isinstance(article, dict)
     }
 
     nouveaux = []
@@ -231,12 +277,9 @@ def main():
         encoding="utf-8"
     )
 
-    print(
-        f"{len(nouveaux)} nouveaux articles."
-    )
-    print(
-        f"{len(resultat['articles'])} articles au total."
-    )
+    print(f"{corrections} anciennes images corrigées.")
+    print(f"{len(nouveaux)} nouveaux articles.")
+    print(f"{len(resultat['articles'])} articles au total.")
 
 
 if __name__ == "__main__":
