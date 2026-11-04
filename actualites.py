@@ -3,8 +3,8 @@ import json
 import re
 import html
 import time
-from datetime import datetime, timezone
 from pathlib import Path
+from datetime import datetime, timezone
 from urllib.parse import urlparse
 
 import requests
@@ -14,44 +14,76 @@ from bs4 import BeautifulSoup
 OUTPUT = Path("actualites_sources.json")
 
 MAX_PAR_FLUX = 15
-MAX_CARACTERES = 12000
-TIMEOUT = 12
+MAX_TEXTE = 9000
+TIMEOUT = 15
 
+# Sources officielles et actualités spécialisées.
+# Les flux officiels peuvent aussi contenir
+# des sujets sans rapport avec l'immobilier.
 FEEDS = [
     (
-        "Location courte durée",
-        "https://news.google.com/rss/search?q=location+courte+dur%C3%A9e+Montpellier&hl=fr&gl=FR&ceid=FR:fr"
+        "Réglementation",
+        "https://www.service-public.fr/abonnements/rss/actu-actualites-particuliers.rss",
+        "Service-Public"
     ),
     (
         "Réglementation",
-        "https://news.google.com/rss/search?q=meubl%C3%A9s+de+tourisme+r%C3%A9glementation&hl=fr&gl=FR&ceid=FR:fr"
+        "https://www.service-public.fr/abonnements/rss/actu-actu-pro.rss",
+        "Service-Public"
+    ),
+    (
+        "Location courte durée",
+        "https://news.google.com/rss/search?q=location+courte+dur%C3%A9e+Montpellier&hl=fr&gl=FR&ceid=FR:fr",
+        "Google News"
+    ),
+    (
+        "Réglementation",
+        "https://news.google.com/rss/search?q=meubl%C3%A9s+tourisme+r%C3%A9glementation&hl=fr&gl=FR&ceid=FR:fr",
+        "Google News"
     ),
     (
         "Fiscalité",
-        "https://news.google.com/rss/search?q=fiscalit%C3%A9+location+saisonni%C3%A8re&hl=fr&gl=FR&ceid=FR:fr"
+        "https://news.google.com/rss/search?q=fiscalit%C3%A9+location+saisonni%C3%A8re&hl=fr&gl=FR&ceid=FR:fr",
+        "Google News"
     ),
     (
         "Marché immobilier",
-        "https://news.google.com/rss/search?q=march%C3%A9+immobilier+Montpellier&hl=fr&gl=FR&ceid=FR:fr"
+        "https://news.google.com/rss/search?q=immobilier+Montpellier&hl=fr&gl=FR&ceid=FR:fr",
+        "Google News"
     ),
     (
         "Tourisme",
-        "https://news.google.com/rss/search?q=tourisme+Montpellier+H%C3%A9rault&hl=fr&gl=FR&ceid=FR:fr"
+        "https://news.google.com/rss/search?q=tourisme+Montpellier+H%C3%A9rault&hl=fr&gl=FR&ceid=FR:fr",
+        "Google News"
     )
 ]
 
-SOURCES_OFFICIELLES = [
-    (
-        "Service-Public",
-        "https://www.service-public.fr/particuliers/actualites/rss"
-    )
+MOTS_PERTINENTS = [
+    "immobilier",
+    "logement",
+    "location",
+    "locatif",
+    "meuble",
+    "tourisme",
+    "touristique",
+    "airbnb",
+    "proprietaire",
+    "copropriete",
+    "fiscalite",
+    "foncier",
+    "taxe de sejour",
+    "hebergement",
+    "montpellier",
+    "herault",
+    "residence secondaire",
+    "changement d usage"
 ]
 
 SESSION = requests.Session()
 SESSION.headers.update({
     "User-Agent": (
-        "Mozilla/5.0 (compatible; MC34Blog/3.0; "
-        "+https://maconciergerie34.fr/)"
+        "Mozilla/5.0 MC34Blog/4.0 "
+        "(veille documentaire)"
     ),
     "Accept-Language": "fr-FR,fr;q=0.9"
 })
@@ -61,21 +93,57 @@ def nettoyer(texte):
     if not texte:
         return ""
 
-    texte = html.unescape(str(texte))
-    texte = re.sub(r"<[^>]+>", " ", texte)
-    texte = re.sub(r"\s+", " ", texte)
+    soup = BeautifulSoup(
+        html.unescape(str(texte)),
+        "html.parser"
+    )
 
-    return texte.strip()
+    return re.sub(
+        r"\s+", " ",
+        soup.get_text(" ", strip=True)
+    ).strip()
 
 
-def extraire_article(url):
-    """
-    Récupère uniquement le texte accessible
-    publiquement dans la page HTML.
+def normaliser(texte):
+    import unicodedata
 
-    Ne contourne pas les abonnements,
-    protections ou restrictions d'accès.
-    """
+    texte = unicodedata.normalize(
+        "NFKD",
+        nettoyer(texte).lower()
+    )
+
+    return "".join(
+        c for c in texte
+        if not unicodedata.combining(c)
+    )
+
+
+def pertinent(titre, resume):
+    texte = normaliser(titre + " " + resume)
+
+    return any(
+        mot in texte
+        for mot in MOTS_PERTINENTS
+    )
+
+
+def est_google_news(url):
+    try:
+        domaine = urlparse(url).hostname or ""
+        return (
+            domaine == "news.google.com"
+            or domaine.endswith(".news.google.com")
+        )
+    except ValueError:
+        return False
+
+
+def extraire_texte(url):
+    # Les liens Google News sont des liens
+    # intermédiaires. On ne les considère
+    # pas comme des pages d'articles.
+    if est_google_news(url):
+        return "", url
 
     try:
         response = SESSION.get(
@@ -83,14 +151,11 @@ def extraire_article(url):
             timeout=TIMEOUT,
             allow_redirects=True
         )
-
         response.raise_for_status()
 
-        type_contenu = response.headers.get(
+        if "text/html" not in response.headers.get(
             "Content-Type", ""
-        ).lower()
-
-        if "text/html" not in type_contenu:
+        ).lower():
             return "", response.url
 
         soup = BeautifulSoup(
@@ -99,131 +164,152 @@ def extraire_article(url):
         )
 
         for element in soup([
-            "script",
-            "style",
-            "nav",
-            "footer",
-            "header",
-            "aside",
-            "form"
+            "script", "style", "nav",
+            "footer", "header", "aside",
+            "form", "noscript"
         ]):
             element.decompose()
 
+        # Privilégier la partie éditoriale.
         conteneur = (
             soup.find("article")
             or soup.find("main")
         )
 
-        if conteneur is None:
+        if not conteneur:
             return "", response.url
 
         paragraphes = []
+        vus = set()
 
         for p in conteneur.find_all("p"):
-            texte = nettoyer(p.get_text(" ", strip=True))
+            texte = nettoyer(
+                p.get_text(" ", strip=True)
+            )
 
-            if len(texte) >= 60:
-                paragraphes.append(texte)
+            if len(texte) < 70:
+                continue
+
+            if texte in vus:
+                continue
+
+            vus.add(texte)
+            paragraphes.append(texte)
 
         contenu = "\n\n".join(paragraphes)
 
-        return contenu[:MAX_CARACTERES], response.url
+        # Éviter de prendre quelques
+        # éléments de navigation pour
+        # un véritable contenu.
+        if len(contenu) < 350:
+            return "", response.url
+
+        return contenu[:MAX_TEXTE], response.url
 
     except requests.RequestException as erreur:
-        print(f"Lecture impossible : {erreur}")
-        return "", url
-    except Exception as erreur:
-        print(f"Extraction ignorée : {erreur}")
+        print(
+            "Lecture impossible :",
+            str(erreur)[:150]
+        )
         return "", url
 
 
-def collecter_flux(categorie, url):
-    actualites = []
+def collecter_flux(categorie, url, nom_flux):
+    resultats = []
 
     try:
         response = SESSION.get(
             url,
             timeout=20
         )
-
         response.raise_for_status()
 
         flux = feedparser.parse(
             response.content
         )
 
-        for entree in flux.entries[:MAX_PAR_FLUX]:
+        if not flux.entries:
+            print(
+                "Flux vide ou inaccessible :",
+                nom_flux
+            )
 
+        for entree in flux.entries[:MAX_PAR_FLUX]:
             titre = nettoyer(
                 entree.get("title", "")
             )
-
-            lien = entree.get(
-                "link", ""
+            lien = str(
+                entree.get("link", "")
             ).strip()
-
-            if not titre or not lien:
-                continue
 
             resume = nettoyer(
                 entree.get("summary", "")
             )
 
-            source = entree.get(
-                "source", {}
-            )
+            if not titre or not lien.startswith(
+                "https://"
+            ):
+                continue
+
+            if not pertinent(titre, resume):
+                continue
+
+            source = entree.get("source", {})
+            source_name = nom_flux
 
             if isinstance(source, dict):
-                nom_source = source.get(
-                    "title", ""
+                source_name = (
+                    source.get("title")
+                    or nom_flux
                 )
-            else:
-                nom_source = ""
 
-            contenu, lien_final = extraire_article(
+            contenu, lien_final = extraire_texte(
                 lien
             )
 
-            if contenu:
-                print(
-                    f"Contenu récupéré : "
-                    f"{titre[:60]}"
-                )
-
-            actualites.append({
+            resultats.append({
                 "category": categorie,
                 "title": titre,
+                "summary": resume[:2000],
+                "source_name": source_name,
                 "source_url": lien,
                 "resolved_url": lien_final,
-                "source_name": nom_source,
                 "published": entree.get(
-                    "published", ""
+                    "published",
+                    entree.get("updated", "")
                 ),
-                "summary": resume,
                 "article_text": contenu,
                 "content_available": bool(contenu)
             })
 
-            time.sleep(0.2)
+            time.sleep(0.1)
 
     except requests.RequestException as erreur:
         print(
-            f"Erreur flux {categorie}: "
-            f"{erreur}"
+            "Erreur flux",
+            nom_flux,
+            str(erreur)[:150]
         )
 
-    return actualites
+    return resultats
 
 
 def main():
     actualites = []
     liens_vus = set()
 
-    for categorie, url in FEEDS:
-        print(f"Collecte : {categorie}")
+    for categorie, url, nom_flux in FEEDS:
+        print("Collecte :", categorie, nom_flux)
 
         resultats = collecter_flux(
-            categorie, url
+            categorie,
+            url,
+            nom_flux
+        )
+
+        print(
+            len(resultats),
+            "actualités pertinentes"
         )
 
         for item in resultats:
@@ -252,14 +338,13 @@ def main():
     )
 
     disponibles = sum(
-        1 for item in actualites
-        if item["content_available"]
+        bool(item["content_available"])
+        for item in actualites
     )
 
     print(
         f"{len(actualites)} actualités collectées."
     )
-
     print(
         f"{disponibles} contenus détaillés récupérés."
     )
