@@ -32,18 +32,22 @@ jobs:
       - name: Recuperer les actualites
         run: python actualites.py
 
-      - name: Preparer les articles
+      - name: Selectionner les actualites
         run: python generer_articles.py
 
-      - name: Enregistrer les donnees
+      - name: Publier les articles
+        run: python publier_articles.py
+
+      - name: Enregistrer les publications
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           git add actualites_sources.json
           git add articles_candidats.json
+          git add articles.json
 
           if ! git diff --cached --quiet; then
-            git commit -m "Actualisation automatique MC34"
+            git commit -m "Publication automatique MC34"
             git push
           fi
