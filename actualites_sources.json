@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-04T09:11:50.340111+00:00",
+  "updated_at": "2026-11-04T09:16:33.229719+00:00",
   "sources": [
     {
       "category": "Location courte durée",
@@ -123,6 +123,12 @@
     },
     {
       "category": "Fiscalité",
+      "title": "La fiscalité des locations saisonnières touristiques - meublés de tourisme - PAP",
+      "source_url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOVkdYbExMNUFabVdFXzNrVDVWQjhHNlJ0RVhSSnlhUzViR1l1aWdwWWNaU3pkQk01Mzc1eWJkQ0xNdndHTmE5TnBlTmU4Y2xMck11U0pjM01oRGZkeDNNSTVzaWo0aXV1VUJFd0N2UVdGZ1ZsZmI5Z0gtd3VZQW0ycVFDblh5NkNOM1BzUjB3?oc=5",
+      "published": "Fri, 22 May 2026 07:00:00 GMT"
+    },
+    {
+      "category": "Fiscalité",
       "title": "Location saisonnière : le régime réel qui effaçait l'impôt serait plafonné à 5 000 € par an en 2027 - JeChange",
       "source_url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNRHFaUDhnM3lTeGR6T1Bpa2NNeW1vRnlteUFGSVM0bXA3YTY0S2NUU3dEbjN1UTlPYncxWE9pazZmTjBnMkdHWTlEYUdmS3hkdnR1aTM2ZEE0WWpQVnM1MEhhM3hYVzJOQ3lPX2tlZ0d2dVp4ZnVNN1gzcERBSUZLRF9CRHFlV1NCTVpsZFZxM0pGakRmWGE3am55anIyODJad2c?oc=5",
       "published": "Sat, 10 Oct 2026 07:00:00 GMT"
@@ -132,18 +138,6 @@
       "title": "Location saisonnière, faculté de suspendre la location et taxe d'habitation - LégiFiscal",
       "source_url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQMmRqN2h0bkt3RE9QRVdWUzc3Tk5qaWNOSTl0c1NlRGFsWW1kT0FESV9adDhVY0lfSkhFcERhZzJuMXBjNjJIUHFBT3FYU3EwZjNzTktKdlRHaDUyUTF2Q1FtT0xubGhYX1dSVUlYcU9uRVItSEE2dU1aTDc5V2JvdFRPMVd0VERVQW1VOW5DMnhpdHRSRXY5SnZHNEdRZGJwWC1JWnkydG1rSGNFVXlIQXNRcEpxOXg0QkpNUEhmWFI?oc=5",
       "published": "Sun, 18 Oct 2026 22:04:39 GMT"
-    },
-    {
-      "category": "Fiscalité",
-      "title": "Airbnb, Abritel : déclarer les revenus aux impôts en 2023, quelle case - Tout Sur Mes Finances",
-      "source_url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQdkhJSEpnRGpCanBQM2lBb1BpejFFR2VKem9uRG84alEtVjd1a1FMdzR2ZHN0WVQyNzgweVBsMHoxNDlneE5BY01ROVY3eHRHSUYtUGdfam96Q1NVT1hvUUdBaGRzc2NNbkFpQm5mRkRyWGZfdjY2NFQ4UGZlM011eGxYb0ROUkVoN1ZJT3M1eG5LOHFadHMxampn?oc=5",
-      "published": "Wed, 28 Oct 2026 09:22:39 GMT"
-    },
-    {
-      "category": "Fiscalité",
-      "title": "La fiscalité des locations saisonnières touristiques - meublés de tourisme - PAP",
-      "source_url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOVkdYbExMNUFabVdFXzNrVDVWQjhHNlJ0RVhSSnlhUzViR1l1aWdwWWNaU3pkQk01Mzc1eWJkQ0xNdndHTmE5TnBlTmU4Y2xMck11U0pjM01oRGZkeDNNSTVzaWo0aXV1VUJFd0N2UVdGZ1ZsZmI5Z0gtd3VZQW0ycVFDblh5NkNOM1BzUjB3?oc=5",
-      "published": "Fri, 22 May 2026 07:00:00 GMT"
     },
     {
       "category": "Fiscalité",
@@ -159,21 +153,21 @@
     },
     {
       "category": "Fiscalité",
-      "title": "Location meublée : faut-il s’attendre à moins d’avantages fiscaux dès 2027 ? - Démarches Administratives",
-      "source_url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOOHNwVEgtQ2xrUzJzZW8xdTR1RVFXdW5EZHAxWUJyYVp5NVNENHhLSURiSWg2b2ozNzhabVRjd0xXU0VBeW5ReWlTOEhmNnVEZHA5cmhZaFQ3TmxlczA4R0tzSlpaWkxvQlNSZkU0TlphSFNMbG5Gc016YkxscTFYV0QzZGxNV2VzUUJMdGw1eU1sc1N5cEQyd3N2ZVlJVWNvUmxwa1l6SE5ELWFfM2FQU1BIR0Z5WVhmdE1j0gHAAUFVX3lxTE9lVFEtdWtBaHh3UHIyUEFzb2dLc0hjT3MtNUhzMlRXVGlPbnJwYmtmdGhYUW4zaUUzaENwa1E2ZUVMNHA0ZFJXUjhPLTZtWk5lTU9nX3JQX1hVcTBENkExYjdXb3ZDQ0txa1JudUpGelQ5dS1yUEMzSnMyRjcwLVBCbXJjc0ZHMXVrN3hEWDRNa3ZTdzBjM3ZzbzBVLUt5dkVXejRxa0RpSVlzSkZHcVJvdW9DQ0hld1U2eEV6UUZqcQ?oc=5",
-      "published": "Fri, 02 Oct 2026 07:00:00 GMT"
-    },
-    {
-      "category": "Fiscalité",
-      "title": "Pourquoi le durcissement des règles de la location saisonnière aurait un impact très limité sur l’offre de logements - Figaro Immobilier",
-      "source_url": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxNSTR5Q3I2ZlRTRVlnUVFnejdjeHpuMjdva0xCNXc0bDlYZE5ZVWdaNFpFSHVUX0ctNVY4eFZYV1lPcmN2bWdzbjBBdGc5VDhQM01keExLRDRsRVNBbzBfZEdiZndWaXdtNUMxa1RWNG96RXhnM2hlVjRkTG54a096NmxOYUhMSEZRSlFSMmlLZnJlUjFJRDBPM2owUXhLOUJMRFR6SWczbnQyQS1ieDVvRmZfcTRydE1vemx6SU1MZWZ6R3JvU0pGOHAteFlMaVhsVllTeUNKQ1F2YmtEM2dYN3NMSlJSZXB4X3VxXzB2aHpVR3FFejNZ?oc=5",
-      "published": "Mon, 28 Sep 2026 07:00:00 GMT"
+      "title": "Taxe d’habitation - De nouvelles exonérations pour les locations touristiques - Que Choisir",
+      "source_url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNU0p6SFdEMnFlOFVrRVQxZ3BSZE1SLXlhZTVPYnJ1V0ZMdWNvR0FMMzYwSW5ZUkV5QjVSX0V0ZnhFTUx3MWYyblo1SzJYejd3T09rcFE2b01xSFFmX2s2TEduUjZtbzNQcE80cGwzRUVsMl9jQkNORDV2YmpPVFJqRGVVZUhqbzd3TnF5LTJFSW1RanNxSHdQRVFkRkZuQkIycHg4a2l0dnlFZk03bVJrTm1EaXVoNnB2dlhucmt3?oc=5",
+      "published": "Sat, 28 Mar 2026 07:00:00 GMT"
     },
     {
       "category": "Fiscalité",
       "title": "Location saisonnière : les nouvelles règles en 2026 - LeSiteImmo",
       "source_url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQUy01ZDBPR0NVM2NDajZqb2ZHZkI1Ry1BS0paTGFGeHI0eTJGTHhTREFiaFJDQVZZOUpJSkUzcHhiX19VUUVIamlJakpVX08wNUZLQVlBMnVUbzhzRlJON2F3aC1IOHFBeTdVdXFnUldMaGxqdWwydmFHSXZydXVkTk4xd0QzWVY4RHc?oc=5",
       "published": "Fri, 05 Jun 2026 07:00:00 GMT"
+    },
+    {
+      "category": "Fiscalité",
+      "title": "Locations touristiques : de nouvelles règles en 2025 ? - Service Public",
+      "source_url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE1NVnhmaHNydHVvUEtqMHVqeXVRbW4xbUNNQUpucjFNNTNERTZlYVlOVjdpY2VmVkM5VW1HZTR3RTNFZllRbWpHbk5faEdsQ0Z5RzFfNFRnMldZYjFUSHpjSWFEYUh6NVVINWJjRmVDZDZxWk0?oc=5",
+      "published": "Wed, 01 Oct 2025 02:42:07 GMT"
     },
     {
       "category": "Fiscalité",
