@@ -129,7 +129,7 @@ def main():
     )
 
     print(
-        f"{len(actualites)} actualités collectées."
+        f"{len(donnees['sources'])} actualités collectées."
     )
 
 
