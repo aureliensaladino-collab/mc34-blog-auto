@@ -3,283 +3,454 @@ import json
 import re
 import hashlib
 import html
-from datetime import datetime, timezone
-from email.utils import parsedate_to_datetime
 from pathlib import Path
-from difflib import SequenceMatcher
+from datetime import datetime, timezone
+from urllib.parse import urlparse
+from bs4 import BeautifulSoup
 
 SOURCE = Path("articles_candidats.json")
 OUTPUT = Path("articles.json")
 
-MAX_ARTICLES = 60
 MAX_NOUVEAUX = 5
+MAX_TOTAL = 60
 
-# Photos d'illustration par catégorie
 IMAGES = {
-    "reglementation": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200",
-    "fiscalite": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200",
-    "immobilier": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200",
-    "tourisme": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1200",
-    "location": "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=1200",
-    "proprietaire": "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200"
+    "Réglementation": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&q=85",
+    "Fiscalité": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=85",
+    "Marché immobilier": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=85",
+    "Tourisme": "https://images.unsplash.com/photo-1533105079780-92b9be482077?w=1200&q=85",
+    "Location courte durée": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&q=85"
 }
 
-IMAGE_DEFAUT = (
-    "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200"
-)
-
-
-def lire_json(chemin, defaut):
-    try:
-        return json.loads(
-            chemin.read_text(encoding="utf-8")
-        )
-    except (OSError, ValueError):
-        return defaut
+IMAGE_DEFAUT = IMAGES["Marché immobilier"]
 
 
 def nettoyer(texte):
-    texte = html.unescape(str(texte or ""))
-    texte = re.sub(r"<[^>]+>", " ", texte)
-    return re.sub(r"\s+", " ", texte).strip()
-
-
-def titre_propre(titre):
-    titre = nettoyer(titre)
-    if " - " in titre:
-        titre = titre.rsplit(" - ", 1)[0]
-    return titre.strip()
-
-
-def identifiant(url):
-    return hashlib.sha256(
-        url.encode("utf-8")
-    ).hexdigest()[:16]
-
-
-def date_publication(valeur):
-    try:
-        date = parsedate_to_datetime(valeur)
-        if date.tzinfo is None:
-            date = date.replace(tzinfo=timezone.utc)
-        return date.strftime("%d/%m/%Y")
-    except (TypeError, ValueError, IndexError):
+    if not texte:
         return ""
 
+    soup = BeautifulSoup(
+        html.unescape(str(texte)),
+        "html.parser"
+    )
 
-def normaliser(texte):
     return re.sub(
-        r"[^a-z0-9]+", " ",
-        nettoyer(texte).lower()
+        r"\s+", " ",
+        soup.get_text(" ", strip=True)
     ).strip()
 
 
-def choisir_image(categorie, titre=""):
-    texte = normaliser(categorie + " " + titre)
+def phrases(texte):
+    texte = nettoyer(texte)
 
-    priorites = [
-        ("fiscal", "fiscalite"),
-        ("impot", "fiscalite"),
-        ("taxe", "fiscalite"),
-        ("loi", "reglementation"),
-        ("decret", "reglementation"),
-        ("reglement", "reglementation"),
-        ("interdiction", "reglementation"),
-        ("autorisation", "reglementation"),
-        ("copropriete", "reglementation"),
-        ("immobilier", "immobilier"),
-        ("marche", "immobilier"),
-        ("tourisme", "tourisme"),
-        ("voyage", "tourisme"),
-        ("location", "location"),
-        ("airbnb", "location"),
-        ("proprietaire", "proprietaire")
+    return [
+        phrase.strip()
+        for phrase in re.split(
+            r"(?<=[.!?])\s+(?=[A-ZÀ-ÖØ-Þ0-9])",
+            texte
+        )
+        if len(phrase.strip()) >= 45
     ]
 
-    for mot, cle in priorites:
-        if mot in texte:
-            return IMAGES[cle]
 
-    return IMAGE_DEFAUT
+def extraire_faits(texte, maximum=8):
+    resultat = []
+    vus = set()
 
+    for phrase in phrases(texte):
+        cle = phrase.lower()
 
-def corriger_images(articles):
-    corrections = 0
-
-    for article in articles:
-        if not isinstance(article, dict):
+        if cle in vus:
             continue
 
-        image = article.get("image")
+        if len(phrase) > 500:
+            continue
 
-        if not isinstance(image, str) or not image.strip():
-            article["image"] = choisir_image(
-                str(article.get("category", "")),
-                str(article.get("title", ""))
-            )
-            corrections += 1
+        vus.add(cle)
+        resultat.append(phrase)
 
-    return corrections
+        if len(resultat) >= maximum:
+            break
+
+    return resultat
 
 
-def resume_exploitable(resume, titre):
-    resume = nettoyer(resume)
-    titre = nettoyer(titre)
+def image_article(categorie):
+    return IMAGES.get(
+        categorie,
+        IMAGE_DEFAUT
+    )
 
-    if not resume or len(resume) < 100:
+
+def identifiant(article):
+    base = (
+        article.get("resolved_url")
+        or article.get("source_url")
+        or article.get("title", "")
+    )
+
+    return hashlib.sha256(
+        base.encode("utf-8")
+    ).hexdigest()[:16]
+
+
+def domaine_source(url):
+    try:
+        return urlparse(url).hostname or ""
+    except ValueError:
         return ""
 
-    similarite = SequenceMatcher(
-        None,
-        normaliser(resume),
-        normaliser(titre)
-    ).ratio()
 
-    if similarite > 0.65:
-        return ""
+def construire_contenu(article):
+    titre = nettoyer(
+        article.get("title", "")
+    )
 
-    return resume[:650]
+    categorie = article.get(
+        "category",
+        "Actualités"
+    )
 
+    resume = nettoyer(
+        article.get("summary", "")
+    )
 
-def creer_article(item):
-    titre = titre_propre(item.get("title", ""))
-    lien = item.get("source_url", "")
-    categorie = item.get("category", "Actualités")
-    media = nettoyer(item.get("source_name", ""))
-    date = date_publication(item.get("published", ""))
+    texte = nettoyer(
+        article.get("article_text", "")
+    )
 
-    if not titre or not lien.startswith("https://"):
-        return None
+    nom_source = nettoyer(
+        article.get("source_name", "")
+    ) or domaine_source(
+        article.get("source_url", "")
+    )
 
-    resume = resume_exploitable(
-        item.get("summary", ""),
-        titre
+    url_source = (
+        article.get("resolved_url")
+        or article.get("source_url", "")
+    )
+
+    # On ne transforme pas un simple titre
+    # en affirmation détaillée.
+    contenu_disponible = (
+        len(texte) >= 350
+    )
+
+    faits = extraire_faits(
+        texte if contenu_disponible else resume,
+        maximum=8
     )
 
     introduction = (
-        resume if resume else
-        "Cette actualité a été identifiée dans notre "
-        "veille consacrée à la location courte durée "
-        "et au marché immobilier."
+        f"{titre}. Cette actualité concerne "
+        f"le domaine « {categorie.lower()} » "
+        "et peut intéresser les propriétaires "
+        "de logements à Montpellier et "
+        "dans l'Hérault."
     )
 
-    contenu = [
-        {
-            "heading": "Ce qu'il faut retenir",
-            "text": introduction
-        },
-        {
-            "heading": "Le contexte",
-            "text": (
-                "Cette publication concerne le thème "
-                f"« {categorie} ». Elle fait partie "
-                "des sujets suivis par Ma Conciergerie 34 "
-                "pour informer les propriétaires de "
-                "Montpellier et de l'Hérault."
-            )
-        },
-        {
-            "heading": "Ce que les propriétaires peuvent vérifier",
-            "text": (
-                "Avant d'agir, consultez la publication "
-                "originale et vérifiez si les informations "
-                "concernent votre logement."
-            )
-        }
-    ]
+    sections = []
 
-    if media:
-        contenu.append({
-            "heading": "La source de l'information",
-            "text": (
-                f"Cette actualité a été relayée par {media}. "
-                "La publication originale est accessible "
-                "dans les sources ci-dessous."
-            )
+    if contenu_disponible and faits:
+        sections.append({
+            "title": "Les informations à retenir",
+            "paragraphs": [
+                "Le document consulté présente "
+                "notamment les éléments suivants."
+            ]
         })
 
-    return {
-        "id": identifiant(lien),
-        "category": categorie,
-        "title": titre,
-        "excerpt": (
-            resume[:180] if resume else
-            "Actualité immobilière et location courte "
-            "durée : les informations à connaître."
-        ),
-        "date": date,
-        "minutes": 2,
-        "image": choisir_image(categorie, titre),
-        "content": contenu,
-        "sources": [
-            {
-                "title": media or "Source originale",
-                "url": lien
-            }
+        # Extraits courts, sans reproduction
+        # intégrale de l'article source.
+        for fait in faits[:5]:
+            sections[-1]["paragraphs"].append(
+                fait[:280]
+            )
+
+    elif resume:
+        sections.append({
+            "title": "Ce que rapporte la source",
+            "paragraphs": [
+                resume[:700]
+            ]
+        })
+
+    else:
+        sections.append({
+            "title": "Ce que l'on sait",
+            "paragraphs": [
+                "Le titre de cette actualité "
+                "a été repéré dans un flux "
+                "d'information. Le contenu "
+                "détaillé n'a pas pu être "
+                "vérifié automatiquement."
+            ]
+        })
+
+    sections.append({
+        "title": "Pourquoi suivre ce sujet ?",
+        "paragraphs": [
+            "Pour un propriétaire qui loue "
+            "un logement en courte durée, "
+            "les évolutions du marché, "
+            "du tourisme et des règles "
+            "applicables peuvent influencer "
+            "la gestion de son bien.",
+            "Il est utile de distinguer "
+            "les annonces, les projets "
+            "et les mesures réellement "
+            "entrées en vigueur avant "
+            "de prendre une décision."
         ]
+    })
+
+    if categorie == "Fiscalité":
+        conseil = (
+            "Vérifier la période fiscale "
+            "concernée, le régime applicable "
+            "et les textes officiels avant "
+            "toute déclaration."
+        )
+    elif categorie == "Réglementation":
+        conseil = (
+            "Consulter les règles en vigueur "
+            "et les démarches éventuellement "
+            "demandées par la commune "
+            "où se situe le logement."
+        )
+    elif categorie == "Tourisme":
+        conseil = (
+            "Comparer les tendances annoncées "
+            "avec la fréquentation réelle, "
+            "les réservations et la saisonnalité."
+        )
+    elif categorie == "Marché immobilier":
+        conseil = (
+            "Examiner les données locales "
+            "et la période étudiée avant "
+            "d'en tirer des conclusions "
+            "sur la rentabilité d'un bien."
+        )
+    else:
+        conseil = (
+            "Vérifier les règles locales, "
+            "les conditions de location "
+            "et les informations officielles "
+            "avant de modifier ses pratiques."
+        )
+
+    sections.append({
+        "title": "Ce que les propriétaires peuvent vérifier",
+        "paragraphs": [conseil]
+    })
+
+    sections.append({
+        "title": "Source et vérification",
+        "paragraphs": [
+            f"Source indiquée : {nom_source}.",
+            (
+                "Lien vers la publication : "
+                + url_source
+            ),
+            (
+                "Cet article est une synthèse "
+                "automatisée. Il ne remplace "
+                "pas la consultation de "
+                "la publication originale."
+            )
+        ]
+    })
+
+    contenu = "\n\n".join(
+        section["title"] + "\n\n"
+        + "\n\n".join(section["paragraphs"])
+        for section in sections
+    )
+
+    return introduction, sections, contenu
+
+
+def creer_article(candidat):
+    titre = nettoyer(
+        candidat.get("title", "")
+    )
+
+    categorie = candidat.get(
+        "category",
+        "Actualités"
+    )
+
+    introduction, sections, contenu = (
+        construire_contenu(candidat)
+    )
+
+    maintenant = datetime.now(
+        timezone.utc
+    ).isoformat()
+
+    return {
+        "id": identifiant(candidat),
+        "title": titre,
+        "category": categorie,
+        "date": candidat.get("published")
+        or maintenant,
+        "published": candidat.get("published")
+        or maintenant,
+        "excerpt": introduction,
+        "summary": introduction,
+        "description": introduction,
+        "image": image_article(categorie),
+        "image_url": image_article(categorie),
+        "source_name": candidat.get(
+            "source_name",
+            ""
+        ),
+        "source_url": candidat.get(
+            "resolved_url"
+        ) or candidat.get(
+            "source_url",
+            ""
+        ),
+        "sections": sections,
+        "content": contenu,
+        "body": contenu,
+        "status": "published",
+        "created_at": maintenant
     }
 
 
+def lire_json(chemin, defaut):
+    if not chemin.exists():
+        return defaut
+
+    try:
+        return json.loads(
+            chemin.read_text(
+                encoding="utf-8"
+            )
+        )
+    except (
+        json.JSONDecodeError,
+        OSError
+    ):
+        return defaut
+
+
 def main():
-    donnees = lire_json(
-        SOURCE, {"candidats": []}
-    )
-    existant = lire_json(
-        OUTPUT, {"articles": []}
+    candidats = lire_json(
+        SOURCE,
+        []
     )
 
-    articles = existant.get("articles", [])
+    anciens = lire_json(
+        OUTPUT,
+        []
+    )
 
-    if not isinstance(articles, list):
-        articles = []
+    if isinstance(anciens, dict):
+        anciens = anciens.get(
+            "articles",
+            []
+        )
 
-    # Réparer les photos des anciens articles
-    corrections = corriger_images(articles)
+    if not isinstance(anciens, list):
+        anciens = []
 
-    ids = {
-        article.get("id")
-        for article in articles
+    if not isinstance(candidats, list):
+        candidats = []
+
+    # Conserver les anciens articles
+    # et réparer les images absentes.
+    for article in anciens:
+        if not isinstance(article, dict):
+            continue
+
+        categorie = article.get(
+            "category",
+            "Marché immobilier"
+        )
+
+        if not article.get("image"):
+            article["image"] = image_article(
+                categorie
+            )
+
+        if not article.get("image_url"):
+            article["image_url"] = article["image"]
+
+    ids_existants = {
+        str(article.get("id", ""))
+        for article in anciens
         if isinstance(article, dict)
+    }
+
+    urls_existantes = {
+        article.get("source_url", "")
+        for article in anciens
+        if isinstance(article, dict)
+        and article.get("source_url")
     }
 
     nouveaux = []
 
-    for item in donnees.get("candidats", []):
+    for candidat in candidats:
         if len(nouveaux) >= MAX_NOUVEAUX:
             break
 
-        article = creer_article(item)
-
-        if not article:
+        if not isinstance(candidat, dict):
             continue
 
-        if article["id"] in ids:
+        nouvel_article = creer_article(
+            candidat
+        )
+
+        if nouvel_article["id"] in ids_existants:
             continue
 
-        ids.add(article["id"])
-        nouveaux.append(article)
+        if (
+            nouvel_article["source_url"]
+            in urls_existantes
+        ):
+            continue
 
-    resultat = {
-        "updated_at": datetime.now(
-            timezone.utc
-        ).isoformat(),
-        "articles": (
-            nouveaux + articles
-        )[:MAX_ARTICLES]
-    }
+        nouveaux.append(nouvel_article)
+
+        ids_existants.add(
+            nouvel_article["id"]
+        )
+
+        urls_existantes.add(
+            nouvel_article["source_url"]
+        )
+
+    articles = (
+        nouveaux + anciens
+    )[:MAX_TOTAL]
 
     OUTPUT.write_text(
         json.dumps(
-            resultat,
+            articles,
             ensure_ascii=False,
             indent=2
         ),
         encoding="utf-8"
     )
 
-    print(f"{corrections} anciennes images corrigées.")
-    print(f"{len(nouveaux)} nouveaux articles.")
-    print(f"{len(resultat['articles'])} articles au total.")
+    print(
+        f"{len(nouveaux)} nouveaux articles publiés."
+    )
+
+    print(
+        f"{len(articles)} articles au total."
+    )
+
+    print(
+        sum(
+            1 for candidat in candidats
+            if candidat.get("content_available")
+        ),
+        "candidats avec contenu détaillé."
+    )
 
 
 if __name__ == "__main__":
