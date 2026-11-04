@@ -1,6 +1,64 @@
 {
   "articles": [
     {
+      "id": "b189d77a80ac018a",
+      "category": "Location courte durée",
+      "title": "Montpellier durcit sa réglementation sur les locations Airbnb",
+      "excerpt": "Une actualité à suivre pour les propriétaires et professionnels de la location courte durée.",
+      "date": "04/11/2026",
+      "minutes": 2,
+      "image": "",
+      "content": [
+        {
+          "heading": "L'actualité",
+          "text": "Cette information a été repérée dans notre veille immobilière. Le titre et la source sont présentés à titre informatif."
+        },
+        {
+          "heading": "Pourquoi suivre ce sujet ?",
+          "text": "Les évolutions du marché, de la fiscalité et de la réglementation peuvent concerner les propriétaires de locations saisonnières."
+        },
+        {
+          "heading": "À vérifier",
+          "text": "Consultez la publication d'origine et les sources officielles avant de prendre une décision concernant votre logement."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Consulter l'actualité d'origine",
+          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPdll3bUtCNUVzeEhFMWZnT1poMUNjalM5LXc0anI3OUxYWlNmbjhCM1JEd3FJaFJIN2RXNmZrTERKcVpRNkhTMUljTzNqbmJEUDJ6aDlRWDFWdzVwOVFMdHBfb0xaZTdSV3V5RGtzMDZ0c2tNMlY1eVppWXc2cWJLeXhVQVc5SFVPMllfTG9nOFRCandjYTNUalE3NTgyZ1ZRc3N1YlpySU54cV9Lc2xtTUlwOENBOWYwbkJj?oc=5"
+        }
+      ]
+    },
+    {
+      "id": "16ed2697bff66394",
+      "category": "Conseils propriétaires",
+      "title": "Coup dur pour Airbnb, Abritel ou encore Booking… Le Conseil constitutionnel valide une mesure d’interdiction des locations touristiques dans certaines copropriétés",
+      "excerpt": "Une actualité à suivre pour les propriétaires et professionnels de la location courte durée.",
+      "date": "04/11/2026",
+      "minutes": 2,
+      "image": "",
+      "content": [
+        {
+          "heading": "L'actualité",
+          "text": "Cette information a été repérée dans notre veille immobilière. Le titre et la source sont présentés à titre informatif."
+        },
+        {
+          "heading": "Pourquoi suivre ce sujet ?",
+          "text": "Les évolutions du marché, de la fiscalité et de la réglementation peuvent concerner les propriétaires de locations saisonnières."
+        },
+        {
+          "heading": "À vérifier",
+          "text": "Consultez la publication d'origine et les sources officielles avant de prendre une décision concernant votre logement."
+        }
+      ],
+      "sources": [
+        {
+          "title": "Consulter l'actualité d'origine",
+          "url": "https://news.google.com/rss/articles/CBMipgJBVV95cUxONzN6dWw2c1otZGpEU0NITVpjdEZhMmY0MFhoaktBSWVZcUw3UTZVNVNIR1JIYmtRbi1CLUQ2Y1IwUUwxYURMNGU0Sm1RTlZWaUl6bVlya3I4Qk44RjNxYVY5emU2TWdPMVBITVM1blQtU0xRUE92cFhYaHloQjJlbWU5Z3Z0SGVQOC0za3dYYmZ4V0NPNHExQkZOa1JMbFV0dTQyUmpraThVX2hpTzg5NzFwcUhPTDdGaUc1WklzY1p2ZnlFUi1JMi1tUVZXY013Zld3WjRiZHJGMHNSei1Ub19lZDRMRU5GaWNaalI4c1c5YVJaOWN4NTFuQmFpYUI5aVpJbkFsd0ItRXd1MEtUZTNhUmppbU9YT2F6MEo1akxhNmVOWXc?oc=5"
+        }
+      ]
+    },
+    {
       "id": "2007388cc78ab415",
       "category": "Location courte durée",
       "title": "Montpellier : deux propriétaires condamnés pour avoir loué sur Airbnb sans l'autorisation de la mairie",

@@ -1,19 +1,19 @@
 {
-  "updated_at": "2026-11-04T09:16:34.342184+00:00",
+  "updated_at": "2026-11-04T09:26:54.438335+00:00",
   "candidats": [
+    {
+      "title": "Montpellier durcit sa réglementation sur les locations Airbnb - La Gazette de Montpellier",
+      "category": "Location courte durée",
+      "source_url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPdll3bUtCNUVzeEhFMWZnT1poMUNjalM5LXc0anI3OUxYWlNmbjhCM1JEd3FJaFJIN2RXNmZrTERKcVpRNkhTMUljTzNqbmJEUDJ6aDlRWDFWdzVwOVFMdHBfb0xaZTdSV3V5RGtzMDZ0c2tNMlY1eVppWXc2cWJLeXhVQVc5SFVPMllfTG9nOFRCandjYTNUalE3NTgyZ1ZRc3N1YlpySU54cV9Lc2xtTUlwOENBOWYwbkJj?oc=5",
+      "published": "Tue, 14 Oct 2025 07:00:00 GMT",
+      "importance_score": 11,
+      "status": "a_verifier"
+    },
     {
       "title": "Montpellier : deux propriétaires condamnés pour avoir loué sur Airbnb sans l'autorisation de la mairie - lagazettedemontpellier.fr",
       "category": "Location courte durée",
       "source_url": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxPa2JtU2JxcEdxRmM0bVg5UmNja2F1N1F0T1Y2eXBWMU9SZFBLcnI3a2RiaGRHZkxackRWUVdybTBZUm8zOTZveDRxRjZPUG9jNndtUnNCaTNoaF9xZlQxZzA2ZE9RdVJjY0pJWFp2dHgxMGFuVUxJVmdpZHNzSWlDamhKUEhZbEQ1T3JZZ2xmYl9wSjRrcnVSTDFOQ0dleXhtRzFjXzJEbEZQOEZoTDZWS0FCWVBjT1dLSXlPZ1BoZlo4VFlUZ2QxN2gxdHhLenV0T2QwSmplZXNvTjhFbDQyNmNEUHV3SEI0OVg2WFJfOA?oc=5",
       "published": "Tue, 21 Apr 2026 07:00:00 GMT",
-      "importance_score": 10,
-      "status": "a_verifier"
-    },
-    {
-      "title": "Airbnb. Deux propriétaires condamnés à 11 000 € d’amende pour avoir loué leurs logements sans autorisation à Montpellier - Ouest-France",
-      "category": "Location courte durée",
-      "source_url": "https://news.google.com/rss/articles/CBMixAJBVV95cUxONGNhOGtrMUgwYkpjZnMwbkNjUDl1X1JqV241aEgzV200WXlGWkFuaXVKR19xQlBVNXhFM3dvcWxNSGVqTktyUmxjd0xELWRtd1lNdHMwMTRsSjlUaTRWNE5xZmpJcno4Z05wOTEzQnotWFloMUFCeUNibVpib0R3enFTV0k5cm5Ub0JEYmlSWGhSUkFBZzFUbGhpV04yUEhEZHduajh6QldUNnZ6dzJLWjRTaHVwLUZhSnREWmluMHp5WEZtdUpWUFVONWhaVnhMX2dPR0JXaDdCeDdFZGRPVjVEdnc5SUVmZ19LdXd4ZnNITUpDWHAtMXdiQjRfR08yZ0p3MTBQTEEybkdEOU9QdlozcFRTTHZBV0FTSW1GQ21tTU9ZR21UU3MtSldKOGZlU1M1ZEJQeDhNeGpOWmwxbzctLTc?oc=5",
-      "published": "Thu, 23 Apr 2026 07:00:00 GMT",
       "importance_score": 10,
       "status": "a_verifier"
     },
@@ -46,6 +46,14 @@
       "category": "Fiscalité",
       "source_url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNa1p6X2hKN0RXcVdZdUlsQ1hHU1pYM0FFQTRpbHU0YjlwU3VoNEtyU3d1c2VUUTRmYWhhVVVzNFRyaXNNSzVCWHRnS2JLRE0tODNlMmV5dnZLdUZ0OHZHZHl6cEYwa1FXa0diN2h4eTcwamZPaV83M20yajVubExpZzNFeHlCNzk2OEVkbU8xdElKRUhLc2hGdmtncjBjOVFuX3c?oc=5",
       "published": "Tue, 06 Oct 2026 07:00:00 GMT",
+      "importance_score": 7,
+      "status": "a_verifier"
+    },
+    {
+      "title": "Coup dur pour Airbnb, Abritel ou encore Booking… Le Conseil constitutionnel valide une mesure d’interdiction des locations touristiques dans certaines copropriétés - L'Indépendant",
+      "category": "Conseils propriétaires",
+      "source_url": "https://news.google.com/rss/articles/CBMipgJBVV95cUxONzN6dWw2c1otZGpEU0NITVpjdEZhMmY0MFhoaktBSWVZcUw3UTZVNVNIR1JIYmtRbi1CLUQ2Y1IwUUwxYURMNGU0Sm1RTlZWaUl6bVlya3I4Qk44RjNxYVY5emU2TWdPMVBITVM1blQtU0xRUE92cFhYaHloQjJlbWU5Z3Z0SGVQOC0za3dYYmZ4V0NPNHExQkZOa1JMbFV0dTQyUmpraThVX2hpTzg5NzFwcUhPTDdGaUc1WklzY1p2ZnlFUi1JMi1tUVZXY013Zld3WjRiZHJGMHNSei1Ub19lZDRMRU5GaWNaalI4c1c5YVJaOWN4NTFuQmFpYUI5aVpJbkFsd0ItRXd1MEtUZTNhUmppbU9YT2F6MEo1akxhNmVOWXc?oc=5",
+      "published": "Fri, 20 Mar 2026 07:00:00 GMT",
       "importance_score": 7,
       "status": "a_verifier"
     }
