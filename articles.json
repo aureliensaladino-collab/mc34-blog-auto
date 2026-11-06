@@ -1,5 +1,72 @@
 [
   {
+    "id": "624a0fe7350bb706",
+    "title": "\"Politiquement, le logement ne rapportait rien\"",
+    "category": "Marché immobilier",
+    "date": "Thu, 05 Nov 2026 12:32:42 GMT",
+    "published": "Thu, 05 Nov 2026 12:32:42 GMT",
+    "excerpt": "D'après un sondage réalisé par Odoxa pour BFM Business, Le Figaro Magazine et le réseau Orpi, le logement est la priorité n'°1 des Français pour leur pouvoir d'achat. Les trois quarts assurent qu'\"au moment de voter\", il",
+    "summary": "D'après un sondage réalisé par Odoxa pour BFM Business, Le Figaro Magazine et le réseau Orpi, le logement est la priorité n'°1 des Français pour leur pouvoir d'achat. Les trois quarts assurent qu'\"au moment de voter\", il",
+    "description": "D'après un sondage réalisé par Odoxa pour BFM Business, Le Figaro Magazine et le réseau Orpi, le logement est la priorité n'°1 des Français pour leur pouvoir d'achat. Les trois quarts assurent qu'\"au moment de voter\", il",
+    "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&q=85",
+    "image_url": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&q=85",
+    "source_name": "BFM Immo",
+    "source_url": "https://www.bfmtv.com/immobilier/politiquement-le-logement-ne-rapportait-rien-les-francais-en-ont-assez-d-etouffer-a-cause-du-logement-76-comptent-desormais-en-faire-un-critere-de-vote-en-2027_AV-202611050482.html",
+    "sections": [
+      {
+        "title": "Les faits à retenir",
+        "paragraphs": [
+          "Le logement est au cœur des préoccupations des Français, mais aussi un enjeu clé de la prochaine élection présidentielle.",
+          "C'est l'enseignement d'un sondage publié ce jeudi 5 novembre par l'institut Odoxa, en partenariat avec BFM Business, Le Figaro Magazine et le réseau immobilier Orpi."
+        ]
+      },
+      {
+        "title": "Les précisions apportées par la source",
+        "paragraphs": [
+          "Le logement et ses charges annexes pèsent pour environ 1 tiers du budget des personnes interrogées .",
+          "Ainsi, les sondés locataires (qui représentent 40% des ménages en France), dépensent en moyenne 709 euros par mois dans leur loyer."
+        ]
+      },
+      {
+        "title": "À vérifier avant de prendre une décision",
+        "paragraphs": [
+          "Comparer les informations avec les données du marché immobilier local."
+        ]
+      }
+    ],
+    "content": [
+      {
+        "title": "Les faits à retenir",
+        "paragraphs": [
+          "Le logement est au cœur des préoccupations des Français, mais aussi un enjeu clé de la prochaine élection présidentielle.",
+          "C'est l'enseignement d'un sondage publié ce jeudi 5 novembre par l'institut Odoxa, en partenariat avec BFM Business, Le Figaro Magazine et le réseau immobilier Orpi."
+        ]
+      },
+      {
+        "title": "Les précisions apportées par la source",
+        "paragraphs": [
+          "Le logement et ses charges annexes pèsent pour environ 1 tiers du budget des personnes interrogées .",
+          "Ainsi, les sondés locataires (qui représentent 40% des ménages en France), dépensent en moyenne 709 euros par mois dans leur loyer."
+        ]
+      },
+      {
+        "title": "À vérifier avant de prendre une décision",
+        "paragraphs": [
+          "Comparer les informations avec les données du marché immobilier local."
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "BFM Immo",
+        "url": "https://www.bfmtv.com/immobilier/politiquement-le-logement-ne-rapportait-rien-les-francais-en-ont-assez-d-etouffer-a-cause-du-logement-76-comptent-desormais-en-faire-un-critere-de-vote-en-2027_AV-202611050482.html"
+      }
+    ],
+    "status": "published",
+    "created_at": "2026-11-06T08:20:10.482954+00:00",
+    "content_available": true
+  },
+  {
     "id": "d5beba19a0ccb786",
     "title": "Paris voulait freiner Airbnb, c'est tout l'inverse qui se produit",
     "category": "Marché immobilier",
@@ -532,7 +599,7 @@
         "title": "Les précisions apportées par la source",
         "paragraphs": [
           "Vous pouvez désormais privilégier l'affichage des articles de franceinfo dans les résultats de recherche Google.",
-          "Vers une augmentation des salaires après la grève du 5 novembre ?"
+          "France Télévisions utilise votre adresse e-mail pour vous adresser la newsletter \"L’actu à 18h30\" et elle est susceptible d'être personnalisée."
         ]
       },
       {
@@ -554,7 +621,7 @@
         "title": "Les précisions apportées par la source",
         "paragraphs": [
           "Vous pouvez désormais privilégier l'affichage des articles de franceinfo dans les résultats de recherche Google.",
-          "Vers une augmentation des salaires après la grève du 5 novembre ?"
+          "France Télévisions utilise votre adresse e-mail pour vous adresser la newsletter \"L’actu à 18h30\" et elle est susceptible d'être personnalisée."
         ]
       },
       {
