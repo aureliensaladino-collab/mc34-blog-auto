@@ -1,5 +1,72 @@
 [
   {
+    "id": "6773eb51d3d73995",
+    "title": "\"Un pays de propriétaires\" : pourquoi y a-t-il si peu de logements sociaux en Espagne ?",
+    "category": "Marché immobilier",
+    "date": "Fri, 06 Nov 2026 13:59:31 +0100",
+    "published": "Fri, 06 Nov 2026 13:59:31 +0100",
+    "excerpt": "La crise du logement en Espagne résulte de plusieurs décennies de politiques ayant privilégié l'accession à la propriété au détriment du logement locatif social. Cette politique a conduit le pays à disposer de l'un des p",
+    "summary": "La crise du logement en Espagne résulte de plusieurs décennies de politiques ayant privilégié l'accession à la propriété au détriment du logement locatif social. Cette politique a conduit le pays à disposer de l'un des p",
+    "description": "La crise du logement en Espagne résulte de plusieurs décennies de politiques ayant privilégié l'accession à la propriété au détriment du logement locatif social. Cette politique a conduit le pays à disposer de l'un des p",
+    "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&q=85",
+    "image_url": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&q=85",
+    "source_name": "Franceinfo",
+    "source_url": "https://www.franceinfo.fr/monde/espagne/un-pays-de-proprietaires-pourquoi-y-a-t-il-si-peu-de-logements-sociaux-en-espagne_8270816.html#xtor=RSS-3-%5Bgeneral%5D",
+    "sections": [
+      {
+        "title": "Les faits à retenir",
+        "paragraphs": [
+          "La crise du logement en Espagne résulte de plusieurs décennies de politiques ayant privilégié l'accession à la propriété au détriment du logement locatif social.",
+          "Cette politique a conduit le pays à disposer de l'un des parcs de logements locatifs sociaux les plus faibles d'Europe, comme l'explique le média public espagnol RTVE dans cet article."
+        ]
+      },
+      {
+        "title": "Les précisions apportées par la source",
+        "paragraphs": [
+          "Mais derrière cette urgence sociale se cache une défaillance structurelle qui persiste depuis des décennies : l'Espagne possède l'un des plus faibles parcs de logements publics en Europe.",
+          "Selon le ministère du Logement et de l'Agenda urbain, l'Espagne compte environ 318 000 logements sociaux locatifs publics, représentant seulement 1,72% du total des ménages du pays."
+        ]
+      },
+      {
+        "title": "À vérifier avant de prendre une décision",
+        "paragraphs": [
+          "Comparer les informations avec les données du marché immobilier local."
+        ]
+      }
+    ],
+    "content": [
+      {
+        "title": "Les faits à retenir",
+        "paragraphs": [
+          "La crise du logement en Espagne résulte de plusieurs décennies de politiques ayant privilégié l'accession à la propriété au détriment du logement locatif social.",
+          "Cette politique a conduit le pays à disposer de l'un des parcs de logements locatifs sociaux les plus faibles d'Europe, comme l'explique le média public espagnol RTVE dans cet article."
+        ]
+      },
+      {
+        "title": "Les précisions apportées par la source",
+        "paragraphs": [
+          "Mais derrière cette urgence sociale se cache une défaillance structurelle qui persiste depuis des décennies : l'Espagne possède l'un des plus faibles parcs de logements publics en Europe.",
+          "Selon le ministère du Logement et de l'Agenda urbain, l'Espagne compte environ 318 000 logements sociaux locatifs publics, représentant seulement 1,72% du total des ménages du pays."
+        ]
+      },
+      {
+        "title": "À vérifier avant de prendre une décision",
+        "paragraphs": [
+          "Comparer les informations avec les données du marché immobilier local."
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "title": "Franceinfo",
+        "url": "https://www.franceinfo.fr/monde/espagne/un-pays-de-proprietaires-pourquoi-y-a-t-il-si-peu-de-logements-sociaux-en-espagne_8270816.html#xtor=RSS-3-%5Bgeneral%5D"
+      }
+    ],
+    "status": "published",
+    "created_at": "2026-11-07T08:02:52.495591+00:00",
+    "content_available": true
+  },
+  {
     "id": "624a0fe7350bb706",
     "title": "\"Politiquement, le logement ne rapportait rien\"",
     "category": "Marché immobilier",
